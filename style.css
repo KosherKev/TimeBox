@@ -1,0 +1,41 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    font-family: segoe ui;
+}
+
+.main{
+    width:100%;
+    min-height: 100vh;
+    background-color: #717171;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.child{
+    padding:50px 20px;
+    width: 30%;
+    height: 100%;
+    background-color:lightgray;
+    border-radius: 10px;
+}
+
+.child h3{
+    text-align: center;
+    font-weight: 500;
+}
+
+.child img{
+    width: 100%;
+    height: 50%;
+    border-radius: 10px;
+}
+
+input::placeholder{
+    font-size: 13px;
+}
+
+input{
+    font-size: 12px;
+}
