@@ -1,41 +1,164 @@
 *{
-    margin: 0px;
-    padding: 0px;
+    margin:0px;
+    padding:0px;
     font-family: segoe ui;
 }
 
-.main{
+
+.container{
     width:100%;
     min-height: 100vh;
-    background-color: #717171;
+    /* background-color: #717171; */
+    display: flex;
+}
+
+.left{
+    width: 20%;
+    background-color: black;
+    height: 100vh;
+    border: 1px solid black;
+}
+
+
+.right{
+    width: 80%;
+    background-color: white;
+    height: 100vh;
+    position: relative;
+}
+
+
+.image{
+    width: 100%;
+    height: 35vh;
+    /* background-color: red; */
+}
+
+.image img{
+    width: 100%;
+    height: 100%;
+}
+
+.list{
+    width: 100%;
+    height: 15vh;
+    /* background-color: green; */
+
+}
+
+.list li{
+    width: 100%;
+    text-align: center;
+    margin-bottom: 4px;
+    height: 30px;
+    line-height: 30px;
+    border: none;
+    color:white;
+    transition: .5s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 10px;
+    font-weight: 300;
+    font-size: 20px;
+}
+
+.list li:hover{
+    opacity: .7;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.top{
+    width: 100%;
+    height: 5%;
+    background-color:black;
+}
+
+
+.plus{
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background-color: black;
+    border-radius: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.child{
-    padding:50px 20px;
-    width: 30%;
-    height: 100%;
-    background-color:lightgray;
-    border-radius: 10px;
+.plus:hover{
+    box-shadow: 0px 0px 4px 10px lightgray;
+    cursor: pointer;
 }
 
-.child h3{
-    text-align: center;
-    font-weight: 500;
-}
-
-.child img{
+.modal{
     width: 100%;
-    height: 50%;
+    height: 100%;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: none;
+    align-items: center;
+    justify-content: start;
+
+}
+
+.modal_child{
+    width: 50%;
+    padding:20px;
+    border-radius: 10px;
+    background-color: white;
+    margin-left: 100px;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 10px;
+    position: relative;
+
+}
+
+.modal_child input{
+    width: 90%;
+    padding:5px 0px;
+    text-indent: 20px;
+    border: none;
+    border: 1px solid lightgray;
+    border: none;
+    border: 1px solid lightgray;
+}
+
+textarea{
+    width: 90%;
+    height: 150px;
+}
+
+.modal_child button{
+    width: 50%;
+    background-color: black;
+    color:white;
+    border:none;
+    padding: 10px;
     border-radius: 10px;
 }
 
-input::placeholder{
-    font-size: 13px;
+.modal_child button:hover{
+   opacity: 0.9;
+}
+.modal_child button:active{
+   opacity: 0;
+   background-color: white;
+    color:black;
+
 }
 
-input{
-    font-size: 12px;
+.close{
+    position: absolute;
+    right:0;
+    top:0;
+    color:red;
+    font-size: 20px;
 }
+
