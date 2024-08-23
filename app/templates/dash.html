@@ -61,7 +61,8 @@
                 <tr class="table-dark">
             <th>Task Title </th>
             <th>Description</th>
-            <th>Time</th>
+            <th>Start Time</th>
+            <th>End Time</th>
             <th>Action</th>
             </tr>
             </div>
@@ -69,6 +70,7 @@
             
 
             <tr>
+                <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
@@ -133,12 +135,14 @@
             task.startT=document.getElementById("startt").value;
             task.endT=document.getElementById("endt").value;
             task.priority=document.getElementById("prority").value;
+            console.log(task)
+
 
             fetch("http://localhost:8000/tasks/",{
                 method:"POST",
-                // headers:{
-                //     "content-type":"application/json"
-                // },
+                headers:{
+                    "content-type":"application/json"
+                },
                 body:JSON.stringify(task)
             })
             .then(function(res){
@@ -150,6 +154,7 @@
             .catch(function(err){
                 console.log(err)
             })
+
          }
 
          document.getElementById("submittask").addEventListener("click",addTask);
