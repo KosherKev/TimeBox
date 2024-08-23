@@ -18,4 +18,4 @@ class TaskCreate(BaseModel):
     startT: Optional[datetime] = None
     endT: Optional[datetime] = None
     priority: PriorityEnum
-    user_id: int
+    # user_id: int

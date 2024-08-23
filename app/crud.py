@@ -13,7 +13,7 @@ def get_user(db: Session, user_id: int):
     return db.query(User).filter(User.user_id == user_id).first()
 
 def create_task(db: Session, task: TaskCreate):
-    db_task = Task(task_name=task.task_name, task_description=task.task_description, startT=task.startT, endT=task.endT, priority=task.priority, user_id=task.user_id)
+    db_task = Task(task_name=task.task_name, task_description=task.task_description, startT=task.startT, endT=task.endT, priority=task.priority)
     db.add(db_task)
     db.commit()
     db.refresh(db_task)
@@ -21,3 +21,5 @@ def create_task(db: Session, task: TaskCreate):
 
 def get_task(db: Session, task_id: int):
     return db.query(Task).filter(Task.task_id == task_id).first()
+
+# , user_id=task.user_id
