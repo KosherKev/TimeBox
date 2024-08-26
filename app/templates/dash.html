@@ -32,22 +32,28 @@
                 <div class="modal_child">
                     <i class="fa-sharp fa-regular fa-circle-xmark close" id="close"></i>
                     <h4>Add Task</h4>
-                    <input type="text" id="tasktitle" placeholder="Enter task title"/>
 
-                    <input type="datetime-local" placeholder="Enter start time" id="startt"/>
-                    <input type="datetime-local" placeholder="Enter end time" id="endt"/>
+                    <form id="form">
+                    <input required type="text" id="tasktitle" placeholder="Enter task title"/>
+                    
+                    <label >Enter start time</label>
+                    <input required type="datetime-local" placeholder="Enter start time" id="startt"/>
 
-                    <select id="prority">
+                    <label >Enter end time</label>
+                    <input required type="datetime-local" placeholder="Enter end time" id="endt"/>
+
+                    <select required id="prority">
                         <option selected>Please choose task type</option>
                         <option value="P">Top task</option>
                         <option value="S">Secondary</option>
                     </select>
 
-                    <textarea  placeholder="Enter task description" id="taskdes">
+                    <textarea required placeholder="Enter task description" id="taskdes">
                        
                     </textarea>
 
                     <button type="submit" id="submittask">Add</button>
+                </form>
 
                 </div>
 
@@ -55,40 +61,28 @@
 
             <div class="top"></div>
 
+
+            <h3 style="text-align: center; font-weight: 300;margin-bottom: 10px;">Hello, these are top tasks</h3>
+
             <table class="table table-bordered">
-                <div class="grid gap-0 column-gap-3">
-                    <div class="p-2 g-col-2">
-                <tr class="table-dark">
-            <th>Task Title </th>
-            <th>Description</th>
-            <th>Start Time</th>
-            <th>End Time</th>
-            <th>Action</th>
-            </tr>
-            </div>
-                </div>
+                <thead>
+                    <tr class="table-dark">
+                        <th>#</th>
+                        <th>Task</th>
+                        <th>Description</th>
+                        <th>start</th>
+                        <th>end</th>
+                        <th>action</th>
+                    </tr>
+
+                </thead>
+
+                <tbody id="displayTable">
+
+                </tbody>
+            </table>
+
             
-
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
-                    <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0"/>
-                    <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7"/>
-                  </svg><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                    <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                    <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
-                  </svg></td>
-            </tr>
-
-           </table>
-            
-
-
-
-
 
         </div>
 
@@ -109,6 +103,7 @@
 
 
     <script>
+        let allTasks;
          
 
          function close(){
@@ -136,7 +131,9 @@
             task.endT=document.getElementById("endt").value;
             task.priority=document.getElementById("prority").value;
             console.log(task)
+           
 
+            
 
             fetch("http://localhost:8000/tasks/",{
                 method:"POST",
@@ -150,6 +147,17 @@
             })
             .then(function(response){
                 console.log(response)
+
+                if(response.detail==="Cannot create more than 3 top task"){
+                    alert(response.detail)
+                }
+                else{
+                    alert("Tasks has been successfully added");
+                }
+
+                loadTop()
+                close()
+                document.getElementById("form").reset();
             })
             .catch(function(err){
                 console.log(err)
@@ -158,6 +166,84 @@
          }
 
          document.getElementById("submittask").addEventListener("click",addTask);
+
+         
+
+
+        function displayTasks(arr){
+            document.getElementById("displayTable").innerHTML="";
+
+            arr.forEach(function(task,index){
+               let row= document.createElement("tr");
+
+               let id=document.createElement("td");
+               id.append(index+1);
+
+               let title=document.createElement("td");
+               title.append(task.task_name);
+
+               let description=document.createElement("td");
+               description.append(task.task_description);
+
+               let start=document.createElement("td");
+               start.append(task.startT)
+
+               let end=document.createElement("td");
+               end.append(task.endT)
+
+               let actions=document.createElement("td");
+
+
+                    let edit=document.createElement("i");
+                    edit.classList.add("fa-solid");
+                    edit.classList.add("fa-pen-to-square");
+                    edit.classList.add("blue")
+                    actions.appendChild(edit);
+
+
+                    let trash=document.createElement("i");
+                    trash.classList.add("fa-solid");
+                    trash.classList.add("fa-trash");
+                    trash.classList.add("closes")
+                    actions.appendChild(trash);
+                
+
+                    row.appendChild(id);
+                    row.appendChild(title);
+                    row.appendChild(description);
+                    row.appendChild(start);
+                    row.appendChild(end);
+                    row.appendChild(actions);
+
+                    document.getElementById("displayTable").appendChild(row);
+            })
+
+        
+        }
+
+
+        function loadTop(){
+            fetch("http://localhost:8000/tasks/top/tasks",{
+                method:"GET"
+            })
+            .then(function(res){
+                return res.json()
+            })
+            .then(function(response){
+                console.log(response);
+                allTasks=response;
+                displayTasks(allTasks)
+            })
+            .catch(function(err){
+                console.log(err);
+
+            })
+        }
+        
+                document.addEventListener("DOMContentLoaded", function() {
+                    loadTop()
+                });
+
 
     </script>
 </body>
