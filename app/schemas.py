@@ -30,3 +30,13 @@ class Task(BaseModel):
 
     class Config:
         orm_mode = True
+
+class TaskUpdate(BaseModel):
+    task_name: Optional[str] = None
+    task_description: Optional[str] = None
+    startT: Optional[datetime] = None
+    endT: Optional[datetime] = None
+    priority: Optional[str] = None
+
+    class Config:
+        orm_mode = True

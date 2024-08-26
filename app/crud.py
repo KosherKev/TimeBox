@@ -1,7 +1,7 @@
 from fastapi import HTTPException
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, KeyFuncDict
 from .models import User, Task
-from .schemas import UserCreate, TaskCreate
+from .schemas import UserCreate, TaskCreate, TaskUpdate
 
 def create_user(db: Session, user: UserCreate):
     db_user = User(user_name=user.user_name, user_email=user.user_email, user_password=user.user_password)
@@ -50,3 +50,11 @@ def get_secondary_tasks(db: Session):
 
 def get_all_tasks(db: Session):
     return db.query(Task).all()
+
+def update_task(task_id: int, task_update: TaskUpdate, db: Session):
+    task_to_update = db.query(Task).filter(Task.task_id == task_id).first()
+    if not task_to_update:
+        raise HTTPException(status_code=404, detail="Task not found")  
+    for key, value in task_update.dict().items():
+        setattr(task_to_update, key, value)
+    db.commit()
