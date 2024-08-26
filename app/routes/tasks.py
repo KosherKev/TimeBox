@@ -16,11 +16,7 @@ def read_task(task_id: int, db: Session = Depends(database.get_db)):
         raise HTTPException(status_code=404, detail="Task not found")
     return db_task
 
-<<<<<<< HEAD
-@router.get("/top/tasks", response_model= List[schemas.Task])
-=======
 @router.get("/top", response_model= List[schemas.Task])
->>>>>>> c111368b18fc74f9bfbb08553d93c1f82f11df83
 def list_top_tasks(db: Session = Depends(database.get_db)):
     tasks = crud.get_top_tasks(db)
     return tasks

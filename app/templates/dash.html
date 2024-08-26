@@ -59,10 +59,41 @@
 
             </div>
 
+            <!-- <div class="modallll" id="modallllupdate">
+                <div class="modal_child">
+                    <i class="fa-sharp fa-regular fa-circle-xmark close" id="close"></i>
+                    <h4>Update Task</h4>
+
+                    <form id="form">
+                    <input required type="text" id="tasktitleupdate" placeholder="Enter task title"/>
+                    
+                    <label >Enter start time</label>
+                    <input required type="datetime-local" placeholder="Enter start time" id="starttupdate"/>
+
+                    <label >Enter end time</label>
+                    <input required type="datetime-local" placeholder="Enter end time" id="endtupdate"/>
+
+                    <select required id="prorityupdate">
+                        <option selected>Please choose task type</option>
+                        <option value="P">Top task</option>
+                        <option value="S">Secondary</option>
+                    </select>
+
+                    <textarea required placeholder="Enter task description" id="taskdesupdate">
+                       
+                    </textarea>
+
+                    <button type="submit"></button>
+                </form>
+
+                </div>
+
+            </div> -->
+
             <div class="top"></div>
 
 
-            <h3 style="text-align: center; font-weight: 300;margin-bottom: 10px;">Hello, these are top tasks</h3>
+            <!-- <h3 style="text-align: center; font-weight: 300;margin-bottom: 10px;">Hello, these are top tasks</h3> -->
 
             <table class="table table-bordered">
                 <thead>
@@ -223,7 +254,7 @@
 
 
         function loadTop(){
-            fetch("http://localhost:8000/tasks/top/tasks",{
+            fetch("http://localhost:8000/tasks/top/",{
                 method:"GET"
             })
             .then(function(res){
