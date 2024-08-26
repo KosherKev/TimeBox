@@ -46,7 +46,7 @@ def delete_task(db: Session, task_id: int):
         raise HTTPException(status_code=404, detail="Task not found")
 
 def get_secondary_tasks(db: Session):
-    return db.query(Task).filter(Task.priority == "S").all()
+    return db.query(Task).filter(Task.priority == 'S').all()
 
 def get_all_tasks(db: Session):
     return db.query(Task).all()

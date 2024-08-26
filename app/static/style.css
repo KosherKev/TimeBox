@@ -219,7 +219,13 @@ form{
 }
 
 .closes{
+    font-size: 30px;
     color:red;
+}
+
+.closes:hover{
+    opacity: .7;
+    cursor: pointer;
 }
 
 .blue{
@@ -228,6 +234,16 @@ form{
 
 tr:nth-child(odd){
     background-color: lightgray;
+}
+
+#thead{
+    display: flex;
+}
+#shead{
+    display: flex;
+}
+#dhead{
+    display: flex;
 }
 
 

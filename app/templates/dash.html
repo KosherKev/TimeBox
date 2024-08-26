@@ -18,9 +18,9 @@
             </div>
 
             <ul class="list">
-                <li><i class="fa-solid fa-list-check"></i> Top Tasks</li>
-                <li><i class="fa-solid fa-meteor"></i> Secondary</li>
-                <li><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-subtract" viewBox="0 0 16 16">
+                <li id="top"><i class="fa-solid fa-list-check"></i> Top Tasks</li>
+                <li id="secondary"><i class="fa-solid fa-meteor"></i> Secondary</li>
+                <li id="all"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-subtract" viewBox="0 0 16 16">
                     <path d="M0 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2h2a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z"/>
                   </svg>Task dump</li>
             </ul>
@@ -93,7 +93,7 @@
             <div class="top"></div>
 
 
-            <!-- <h3 style="text-align: center; font-weight: 300;margin-bottom: 10px;">Hello, these are top tasks</h3> -->
+            <h3 style="text-align: center; font-weight: 300;margin-bottom: 10px;">Hello, these are top tasks</h3>
 
             <table class="table table-bordered">
                 <thead>
@@ -135,6 +135,7 @@
 
     <script>
         let allTasks;
+        let secondaryTasks;
          
 
          function close(){
@@ -235,7 +236,8 @@
                     let trash=document.createElement("i");
                     trash.classList.add("fa-solid");
                     trash.classList.add("fa-trash");
-                    trash.classList.add("closes")
+                    trash.classList.add("closes");
+                    trash.onclick=deleteTask.bind(this,task.task_id);
                     actions.appendChild(trash);
                 
 
@@ -254,7 +256,7 @@
 
 
         function loadTop(){
-            fetch("http://localhost:8000/tasks/top/",{
+            fetch("http://localhost:8000/tasks/top",{
                 method:"GET"
             })
             .then(function(res){
@@ -263,7 +265,10 @@
             .then(function(response){
                 console.log(response);
                 allTasks=response;
+
                 displayTasks(allTasks)
+
+                
             })
             .catch(function(err){
                 console.log(err);
@@ -271,9 +276,79 @@
             })
         }
         
-                document.addEventListener("DOMContentLoaded", function() {
-                    loadTop()
-                });
+        document.addEventListener("DOMContentLoaded", function() {
+            loadTop()
+        });
+
+
+        function deleteTask(id){
+
+            fetch("http://localhost:8000/tasks/remove/"+id,{
+                method:"DELETE"
+            })
+            .then(function(res){
+                return res.json()
+            })
+            .then(function(response){
+                console.log(response)
+                location.reload()
+
+                getallTasks()
+            })
+            .catch(function(err){
+                console.log(err);
+            })
+        }
+
+
+        function loadSecondary(){
+            fetch("http://localhost:8000/tasks/secondary",{
+                method:"GET"
+            })
+            .then(function(res){
+                return res.json()
+            })
+            .then(function(response){
+                console.log(response);
+                secondaryTasks=response;
+
+                displayTasks(secondaryTasks)
+            })
+            .catch(function(err){
+                console.log(err);
+
+            })
+        }
+
+
+
+        document.getElementById("secondary").addEventListener("click",loadSecondary)
+        document.getElementById("top").addEventListener("click",loadTop)
+
+
+        function getallTasks(){
+            fetch("http://localhost:8000/tasks/all",{
+                method:"GET"
+            })
+            .then(function(res){
+                return res.json()
+            })
+            .then(function(response){
+                console.log(response);
+                displayTasks(response)
+
+                document.getElementById("all").style.backgroundColor="black";
+                document.getElementById("all").style.color="white";
+
+            })
+            .catch(function(err){
+                console.log(err);
+
+            })
+
+        }
+
+        document.getElementById("all").addEventListener("click",getallTasks);
 
 
     </script>
