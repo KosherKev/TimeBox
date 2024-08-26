@@ -16,7 +16,19 @@ def read_task(task_id: int, db: Session = Depends(database.get_db)):
         raise HTTPException(status_code=404, detail="Task not found")
     return db_task
 
-@router.get("/top/tasks", response_model= List[schemas.Task])
+@router.get("/toptasks", response_model= List[schemas.Task])
 def list_top_tasks(db: Session = Depends(database.get_db)):
     tasks = crud.get_top_tasks(db)
     return tasks
+
+@router.delete("/remove/{task_id}", response_model=schemas.Task)
+def delete_task(task_id: int, db: Session = Depends(database.get_db)):
+    return crud.delete_task(db=db, task_id=task_id)
+
+@router.get("/secondary", response_model=List[schemas.Task])
+def read_secondary_tasks(db: Session = Depends(database.get_db)):
+    return crud.get_secondary_tasks(db=db)
+
+@router.get("/all/", response_model=List[schemas.Task])
+def read_all_tasks(db: Session = Depends(database.get_db)):
+    return crud.get_all_tasks(db=db)

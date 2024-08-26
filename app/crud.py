@@ -35,3 +35,18 @@ def get_task(db: Session, task_id: int):
 
 def get_top_tasks(db: Session):
     return db.query(Task).filter(Task.priority == 'P').all()
+
+def delete_task(db: Session, task_id: int):
+    task_to_delete = db.query(Task).filter(Task.task_id == task_id).first()
+    if task_to_delete:
+        db.delete(task_to_delete)
+        db.commit()
+        return task_to_delete
+    else:
+        raise HTTPException(status_code=404, detail="Task not found")
+
+def get_secondary_tasks(db: Session):
+    return db.query(Task).filter(Task.priority == "S").all()
+
+def get_all_tasks(db: Session):
+    return db.query(Task).all()
