@@ -1,28 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>timebox</title>
-    <link rel="stylesheet" href="../static/style.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
+
 <body>
 
 
     <section class="container1">
         <div class="left">
             <div class="image">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6MHr--bkcAbios5T6FKSQ1xeBsFpJgBsF6Q&s"/>
+                <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6MHr--bkcAbios5T6FKSQ1xeBsFpJgBsF6Q&s" />
             </div>
 
             <ul class="list">
                 <li id="top"><i class="fa-solid fa-list-check"></i> Top Tasks</li>
                 <li id="secondary"><i class="fa-solid fa-meteor"></i> Secondary</li>
-                <li id="all"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-subtract" viewBox="0 0 16 16">
-                    <path d="M0 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2h2a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z"/>
-                  </svg>Task dump</li>
+                <li id="all"><svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                        class="bi bi-subtract" viewBox="0 0 16 16">
+                        <path
+                            d="M0 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2h2a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z" />
+                    </svg>Task dump</li>
             </ul>
 
         </div>
@@ -34,71 +42,68 @@
                     <h4>Add Task</h4>
 
                     <form id="form">
-                    <input required type="text" id="tasktitle" placeholder="Enter task title"/>
-                    
-                    <label >Enter start time</label>
-                    <input required type="datetime-local" placeholder="Enter start time" id="startt"/>
+                        <input required type="text" id="tasktitle" placeholder="Enter task title" />
 
-                    <label >Enter end time</label>
-                    <input required type="datetime-local" placeholder="Enter end time" id="endt"/>
+                        <label>Enter start time</label>
+                        <input required type="datetime-local" placeholder="Enter start time" id="startt" />
 
-                    <select required id="prority">
-                        <option selected>Please choose task type</option>
-                        <option value="P">Top task</option>
-                        <option value="S">Secondary</option>
-                    </select>
+                        <label>Enter end time</label>
+                        <input required type="datetime-local" placeholder="Enter end time" id="endt" />
 
-                    <textarea required placeholder="Enter task description" id="taskdes">
-                       
+                        <select required id="prority">
+                            <option selected>Please choose task type</option>
+                            <option value="P">Top task</option>
+                            <option value="S">Secondary</option>
+                        </select>
+
+                        <textarea required placeholder="Enter task description" id="taskdes">
+
                     </textarea>
 
-                    <button type="submit" id="submittask">Add</button>
-                </form>
+                        <button type="submit" id="submittask">Add</button>
+                    </form>
 
                 </div>
 
             </div>
 
-            <!-- <div class="modallll" id="modallllupdate">
+            <div class="modallll" id="modallllupdate">
                 <div class="modal_child">
-                    <i class="fa-sharp fa-regular fa-circle-xmark close" id="close"></i>
+                    <i class="fa-sharp fa-regular fa-circle-xmark close" id="closeupdate"></i>
                     <h4>Update Task</h4>
 
                     <form id="form">
-                    <input required type="text" id="tasktitleupdate" placeholder="Enter task title"/>
-                    
-                    <label >Enter start time</label>
-                    <input required type="datetime-local" placeholder="Enter start time" id="starttupdate"/>
+                        <input required type="text" id="tasktitleupdate" placeholder="Enter task title" />
 
-                    <label >Enter end time</label>
-                    <input required type="datetime-local" placeholder="Enter end time" id="endtupdate"/>
+                        <label>Enter start time</label>
+                        <input required type="datetime-local" placeholder="Enter start time" id="starttupdate" />
 
-                    <select required id="prorityupdate">
-                        <option selected>Please choose task type</option>
-                        <option value="P">Top task</option>
-                        <option value="S">Secondary</option>
-                    </select>
+                        <label>Enter end time</label>
+                        <input required type="datetime-local" placeholder="Enter end time" id="endtupdate" />
 
-                    <textarea required placeholder="Enter task description" id="taskdesupdate">
-                       
+                        <select required id="prorityupdate">
+                            <option selected>Please choose task type</option>
+                            <option value="P">Top task</option>
+                            <option value="S">Secondary</option>
+                        </select>
+
+                        <textarea required placeholder="Enter task description" id="taskdesupdate">
+
                     </textarea>
 
-                    <button type="submit"></button>
-                </form>
+                        <button type="button" id="updatetask">Update</button>
+                    </form>
 
                 </div>
 
-            </div> -->
+            </div>
 
             <div class="top"></div>
 
-
-            <h3 style="text-align: center; font-weight: 300;margin-bottom: 10px;">Hello, these are top tasks</h3>
-
-            <table class="table table-bordered">
+            <table class="table table-striped-columns table-hover">
                 <thead>
                     <tr class="table-dark">
-                        <th>#</th>
+                        <th>Id</th>
                         <th>Task</th>
                         <th>Description</th>
                         <th>start</th>
@@ -113,244 +118,339 @@
                 </tbody>
             </table>
 
-            
+
 
         </div>
 
     </section>
 
 
-            <div class="plus" id="plus">
-                <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="white" class="bi bi-plus-lg" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
-                  </svg>
+    <div class="plus" id="plus">
+        <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="white" class="bi bi-plus-lg"
+            viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+                d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2" />
+        </svg>
 
-            </div>
+    </div>
 
-        </div>
+    </div>
 
     </section>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
 
 
     <script>
         let allTasks;
         let secondaryTasks;
-         
+        let idfor = 0;
 
-         function close(){
+        let current = 0;
+
+
+
+
+        function close() {
             console.log("closing")
-            document.getElementById("modallll").style.display="none";
-         }
+            document.getElementById("modallll").style.display = "none";
+        }
 
-         function openmodal(){
+        function closeUpdate() {
+            console.log("closing")
+            document.getElementById("modallllupdate").style.display = "none";
+        }
+
+        document.getElementById("closeupdate").addEventListener("click", closeUpdate)
+
+        function openmodal() {
             console.log("opening")
 
-            document.getElementById("modallll").style.display="flex";
-         }
+            document.getElementById("modallll").style.display = "flex";
+        }
 
-        document.getElementById("plus").addEventListener("click",openmodal);
-         document.getElementById("close").addEventListener("click", close);
+        document.getElementById("plus").addEventListener("click", openmodal);
+        document.getElementById("close").addEventListener("click", close);
 
 
-         function addTask(){
-            let task={
+        function addTask() {
+            let task = {
 
             }
-            task.task_name=document.getElementById("tasktitle").value
-            task.task_description=document.getElementById("taskdes").value
-            task.startT=document.getElementById("startt").value;
-            task.endT=document.getElementById("endt").value;
-            task.priority=document.getElementById("prority").value;
+            task.task_name = document.getElementById("tasktitle").value
+            task.task_description = document.getElementById("taskdes").value
+            task.startT = document.getElementById("startt").value;
+            task.endT = document.getElementById("endt").value;
+            task.priority = document.getElementById("prority").value;
             console.log(task)
-           
 
-            
 
-            fetch("http://localhost:8000/tasks/",{
-                method:"POST",
-                headers:{
-                    "content-type":"application/json"
+
+
+            fetch("http://localhost:8000/tasks/", {
+                method: "POST",
+                headers: {
+                    "content-type": "application/json"
                 },
-                body:JSON.stringify(task)
+                body: JSON.stringify(task)
             })
-            .then(function(res){
-                return res.json()
+                .then(function (res) {
+                    return res.json()
+                })
+                .then(function (response) {
+                    console.log(response)
+
+                    if (response.detail === "Cannot create more than 3 top task") {
+                        alert(response.detail)
+                    }
+                    else {
+                        alert("Tasks has been successfully added");
+                    }
+
+                    loadTop()
+                    close()
+                    document.getElementById("form").reset();
+                })
+                .catch(function (err) {
+                    console.log(err)
+                })
+
+        }
+
+        document.getElementById("submittask").addEventListener("click", addTask);
+
+
+        function openUpdate() {
+            document.getElementById("modallllupdate").style.display = "flex";
+        }
+
+        function setUpdate(id, array) {
+            openUpdate();
+            let task = array.find(function (a, i) {
+                return id === a.task_id
             })
-            .then(function(response){
-                console.log(response)
+            // console.log(task);
 
-                if(response.detail==="Cannot create more than 3 top task"){
-                    alert(response.detail)
-                }
-                else{
-                    alert("Tasks has been successfully added");
-                }
+            document.getElementById("tasktitleupdate").value = task.task_name;
+            document.getElementById("starttupdate").value = task.startT;
+            document.getElementById("endtupdate").value = task.endT;
+            document.getElementById("prorityupdate").value = task.priority;
+            document.getElementById("taskdesupdate").value = task.task_description;
 
-                loadTop()
-                close()
-                document.getElementById("form").reset();
+
+            idfor = id
+
+        }
+
+        function Update() {
+            let task = {
+
+            }
+            task.task_name = document.getElementById("tasktitleupdate").value
+            task.task_description = document.getElementById("taskdesupdate").value
+            task.startT = document.getElementById("starttupdate").value;
+            task.endT = document.getElementById("endtupdate").value;
+            task.priority = document.getElementById("prorityupdate").value;
+            console.log(task)
+
+            fetch("http://localhost:8000/tasks/update/" + idfor, {
+                method: "PUT",
+                headers: {
+                    "content-type": 'application/json'
+                },
+                body: JSON.stringify(task)
             })
-            .catch(function(err){
-                console.log(err)
+                .then(function (res) {
+                    return res.json()
+                })
+                .then(function (response) {
+                    console.log(response);
+
+                    if(current===1){
+                        loadTop()
+                    }
+                    else if(current===2){
+                        loadSecondary()
+                    }
+                    else{
+                        getallTasks()
+                    }
+                    closeUpdate()
+                })
+                .catch(function (err) {
+                    console.log(err);
+
+                })
+
+
+        }
+
+        document.getElementById("updatetask").addEventListener("click", Update);
+
+        function displayTasks(arr) {
+            document.getElementById("displayTable").innerHTML = "";
+
+            arr.forEach(function (task, index) {
+                let row = document.createElement("tr");
+
+                let id = document.createElement("td");
+                id.append(index + 1);
+
+                let title = document.createElement("td");
+                title.append(task.task_name);
+
+                let description = document.createElement("td");
+                description.append(task.task_description);
+
+                let start = document.createElement("td");
+                start.append(task.startT)
+
+                let end = document.createElement("td");
+                end.append(task.endT)
+
+                let actions = document.createElement("td");
+
+
+                let edit = document.createElement("i");
+                edit.classList.add("fa-solid");
+                edit.classList.add("fa-pen-to-square");
+                edit.classList.add("blue")
+                edit.onclick = setUpdate.bind(this, task.task_id, arr);
+                actions.appendChild(edit);
+
+
+                let trash = document.createElement("i");
+                trash.classList.add("fa-solid");
+                trash.classList.add("fa-trash");
+                trash.classList.add("closesss");
+                trash.onclick = deleteTask.bind(this, task.task_id);
+                actions.appendChild(trash);
+
+
+                row.appendChild(id);
+                row.appendChild(title);
+                row.appendChild(description);
+                row.appendChild(start);
+                row.appendChild(end);
+                row.appendChild(actions);
+
+                document.getElementById("displayTable").appendChild(row);
             })
 
-         }
 
-         document.getElementById("submittask").addEventListener("click",addTask);
-
-         
-
-
-        function displayTasks(arr){
-            document.getElementById("displayTable").innerHTML="";
-
-            arr.forEach(function(task,index){
-               let row= document.createElement("tr");
-
-               let id=document.createElement("td");
-               id.append(index+1);
-
-               let title=document.createElement("td");
-               title.append(task.task_name);
-
-               let description=document.createElement("td");
-               description.append(task.task_description);
-
-               let start=document.createElement("td");
-               start.append(task.startT)
-
-               let end=document.createElement("td");
-               end.append(task.endT)
-
-               let actions=document.createElement("td");
-
-
-                    let edit=document.createElement("i");
-                    edit.classList.add("fa-solid");
-                    edit.classList.add("fa-pen-to-square");
-                    edit.classList.add("blue")
-                    actions.appendChild(edit);
-
-
-                    let trash=document.createElement("i");
-                    trash.classList.add("fa-solid");
-                    trash.classList.add("fa-trash");
-                    trash.classList.add("closes");
-                    trash.onclick=deleteTask.bind(this,task.task_id);
-                    actions.appendChild(trash);
-                
-
-                    row.appendChild(id);
-                    row.appendChild(title);
-                    row.appendChild(description);
-                    row.appendChild(start);
-                    row.appendChild(end);
-                    row.appendChild(actions);
-
-                    document.getElementById("displayTable").appendChild(row);
-            })
-
-        
         }
 
 
-        function loadTop(){
-            fetch("http://localhost:8000/tasks/top",{
-                method:"GET"
+        function loadTop() {
+            fetch("http://localhost:8000/tasks/top", {
+                method: "GET"
             })
-            .then(function(res){
-                return res.json()
-            })
-            .then(function(response){
-                console.log(response);
-                allTasks=response;
+                .then(function (res) {
+                    return res.json()
+                })
+                .then(function (response) {
+                    console.log(response);
+                    allTasks = response;
 
-                displayTasks(allTasks)
+                    displayTasks(allTasks)
+                    current = 1
 
-                
-            })
-            .catch(function(err){
-                console.log(err);
 
-            })
+                })
+                .catch(function (err) {
+                    console.log(err);
+
+                })
         }
-        
-        document.addEventListener("DOMContentLoaded", function() {
+
+        document.addEventListener("DOMContentLoaded", function () {
             loadTop()
         });
 
 
-        function deleteTask(id){
+        function deleteTask(id) {
 
-            fetch("http://localhost:8000/tasks/remove/"+id,{
-                method:"DELETE"
+            fetch("http://localhost:8000/tasks/remove/" + id, {
+                method: "DELETE"
             })
-            .then(function(res){
-                return res.json()
-            })
-            .then(function(response){
-                console.log(response)
-                location.reload()
+                .then(function (res) {
+                    return res.json()
+                })
+                .then(function (response) {
+                    console.log(response)
+                    // location.reload()
 
-                getallTasks()
-            })
-            .catch(function(err){
-                console.log(err);
-            })
+                    if (current === 1) {
+                        loadTop()
+                    }
+                    else if (current === 2) {
+                        loadSecondary()
+                    }
+                    else {
+                        getallTasks()
+                    }
+                })
+                .catch(function (err) {
+                    console.log(err);
+                })
         }
 
 
-        function loadSecondary(){
-            fetch("http://localhost:8000/tasks/secondary",{
-                method:"GET"
+        function loadSecondary() {
+            fetch("http://localhost:8000/tasks/secondary", {
+                method: "GET"
             })
-            .then(function(res){
-                return res.json()
-            })
-            .then(function(response){
-                console.log(response);
-                secondaryTasks=response;
+                .then(function (res) {
+                    return res.json()
+                })
+                .then(function (response) {
+                    console.log(response);
+                    secondaryTasks = response;
+                    current = 2
 
-                displayTasks(secondaryTasks)
-            })
-            .catch(function(err){
-                console.log(err);
+                    displayTasks(secondaryTasks)
+                })
+                .catch(function (err) {
+                    console.log(err);
 
-            })
+                })
         }
 
 
 
-        document.getElementById("secondary").addEventListener("click",loadSecondary)
-        document.getElementById("top").addEventListener("click",loadTop)
+        document.getElementById("secondary").addEventListener("click", loadSecondary)
+        document.getElementById("top").addEventListener("click", loadTop)
 
 
-        function getallTasks(){
-            fetch("http://localhost:8000/tasks/all",{
-                method:"GET"
+        function getallTasks() {
+            fetch("http://localhost:8000/tasks/all", {
+                method: "GET"
             })
-            .then(function(res){
-                return res.json()
-            })
-            .then(function(response){
-                console.log(response);
-                displayTasks(response)
+                .then(function (res) {
+                    return res.json()
+                })
+                .then(function (response) {
+                    console.log(response);
+                    displayTasks(response)
+                    current = 3
 
-                document.getElementById("all").style.backgroundColor="black";
-                document.getElementById("all").style.color="white";
 
-            })
-            .catch(function(err){
-                console.log(err);
+                })
+                .catch(function (err) {
+                    console.log(err);
 
-            })
+                })
 
         }
 
-        document.getElementById("all").addEventListener("click",getallTasks);
+        document.getElementById("all").addEventListener("click", getallTasks);
+
+
+
 
 
     </script>
 </body>
+
 </html>

@@ -2,6 +2,7 @@
     margin:0px;
     padding:0px;
     font-family: segoe ui;
+    opacity: .7s;
 }
 
 
@@ -10,7 +11,6 @@
     min-height: 100vh;
     /* background-color: #717171; */
     display: flex;
-    position: relative;
 }
 
 .left{
@@ -18,7 +18,7 @@
     background-color: black;
     height: 100vh;
     border: 1px solid black;
-    position: fixed;
+    font-size: 9px;
 }
 
 
@@ -26,7 +26,7 @@
     width: 80%;
     background-color: white;
     height: 100vh;
-    position: relative;
+
 }
 
 
@@ -75,7 +75,6 @@
     width: 100%;
     height: 5%;
     background-color:black;
-    position: fixed;
 }
 
 
@@ -164,7 +163,7 @@ textarea{
     position: absolute;
     right:0;
     top:0;
-    color:red;
+    color:lightgray;
     font-size: 20px;
 }
 
@@ -179,15 +178,13 @@ select{
 table{
     width: 90%;
     padding:10px;
-    height: 500px;
     border:20px;
-    background-color: lightgray;
+    font-size: 13px;
 }
 
-
-/* tr,th,td{
-    border:1px solid lightgray;
-} */
+table:hover{
+    cursor: pointer;
+}
 
 
 .viewpop{
@@ -218,32 +215,34 @@ form{
     position: relative;
 }
 
-.closes{
-    font-size: 30px;
-    color:red;
+.closesss{
+    font-size: 13px;
+    color:gray;
+    transition: .3s;
+    margin-left: 5px;
 }
 
-.closes:hover{
-    opacity: .7;
-    cursor: pointer;
+
+.closesss:hover{
+    opacity: .8;
+    font-size: 17px;
 }
+
 
 .blue{
-    color:blue;
+    color:lightslategrey;
+    transition: .3s;
 }
 
-tr:nth-child(odd){
-    background-color: lightgray;
+.blue:hover{
+    opacity: .8;
+    font-size: 17px;
 }
 
-#thead{
-    display: flex;
+td{
+    padding:5px 0px;
 }
-#shead{
-    display: flex;
-}
-#dhead{
-    display: flex;
-}
+
+
 
 

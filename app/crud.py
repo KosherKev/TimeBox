@@ -54,7 +54,7 @@ def get_all_tasks(db: Session):
 def update_task(task_id: int, task_update: TaskUpdate, db: Session):
     task_to_update = db.query(Task).filter(Task.task_id == task_id).first()
     if not task_to_update:
-        raise HTTPException(status_code=404, detail="Task not found")  
+        raise HTTPException(detail="Task not found")  
     for key, value in task_update.dict().items():
         setattr(task_to_update, key, value)
     db.commit()

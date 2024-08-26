@@ -9,13 +9,13 @@ router = APIRouter()
 def create_task(task: schemas.TaskCreate, db: Session = Depends(database.get_db)):
     return crud.create_task(db=db, task=task)
 
-@router.get("/<task_id>", response_model=schemas.TaskCreate)
-@router.get("get/<task_id>", response_model=schemas.TaskCreate)
-def read_task(task_id: int, db: Session = Depends(database.get_db)):
-    db_task = crud.get_task(db=db, task_id=task_id)
-    if db_task is None:
-        raise HTTPException(status_code=404, detail="Task not found")
-    return db_task
+# @router.get("/<task_id>", response_model=schemas.TaskCreate)
+# @router.get("get/<task_id>", response_model=schemas.TaskCreate)
+# def read_task(task_id: int, db: Session = Depends(database.get_db)):
+#     db_task = crud.get_task(db=db, task_id=task_id)
+#     if db_task is None:
+#         raise HTTPException(status_code=404, detail="Task not found")
+#     return db_task
 
 @router.get("/top", response_model= List[schemas.Task])
 def list_top_tasks(db: Session = Depends(database.get_db)):
@@ -34,6 +34,6 @@ def read_secondary_tasks(db: Session = Depends(database.get_db)):
 def read_all_tasks(db: Session = Depends(database.get_db)):
     return crud.get_all_tasks(db)
 
-@router.put("/update/<task_id>")
+@router.put("/update/{task_id}")
 def update_task(task_id: int,task_update: schemas.TaskUpdate, db: Session = Depends(database.get_db)):
     return crud.update_task(task_id, task_update, db)
