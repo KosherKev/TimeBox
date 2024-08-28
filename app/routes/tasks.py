@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
+from datetime import datetime, timedelta
 from .. import crud, schemas, database
 from typing import List
 
@@ -30,10 +31,15 @@ def delete_task(task_id: int, db: Session = Depends(database.get_db)):
 def read_secondary_tasks(db: Session = Depends(database.get_db)):
     return crud.get_secondary_tasks(db=db)
 
-@router.get("/all/", response_model=List[schemas.Task])
+@router.get("/all", response_model=List[schemas.Task])
 def read_all_tasks(db: Session = Depends(database.get_db)):
     return crud.get_all_tasks(db)
 
 @router.put("/update/{task_id}")
 def update_task(task_id: int,task_update: schemas.TaskUpdate, db: Session = Depends(database.get_db)):
     return crud.update_task(task_id, task_update, db)
+
+@router.get("/tasks_near_time")
+def tasks_near_time(db: Session = Depends(database.get_db)):
+    tasks = crud.get_tasks_near_time(db, datetime.now())
+    return tasks

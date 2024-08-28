@@ -1,5 +1,7 @@
 from fastapi import HTTPException
-from sqlalchemy.orm import Session, KeyFuncDict
+from sqlalchemy import between, and_
+from sqlalchemy.orm import Session
+from datetime import datetime, timedelta
 from .models import User, Task
 from .schemas import UserCreate, TaskCreate, TaskUpdate
 
@@ -58,3 +60,21 @@ def update_task(task_id: int, task_update: TaskUpdate, db: Session):
     for key, value in task_update.dict().items():
         setattr(task_to_update, key, value)
     db.commit()
+
+def get_tasks_near_time(db: Session, current_time: datetime, time_delta: timedelta = timedelta(minutes=30)):
+    start_time_lower_bound = current_time - time_delta
+    start_time_upper_bound = current_time + time_delta
+    end_time_lower_bound = current_time - time_delta
+    end_time_upper_bound = current_time + time_delta
+
+    tasks = db.query(Task).filter(
+        and_(
+            between(Task.startT, start_time_lower_bound, start_time_upper_bound),
+            between(Task.endT, end_time_lower_bound, end_time_upper_bound)
+        )
+    ).all()
+
+    for x, obj in tasks:
+        for y in range(obj.len()) - 1:
+            tasks = y.popitem()
+    return tasks
