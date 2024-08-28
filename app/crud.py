@@ -73,4 +73,8 @@ def get_tasks_near_time(db: Session, current_time: datetime, time_delta: timedel
             between(Task.endT, end_time_lower_bound, end_time_upper_bound)
         )
     ).all()
+
+    for x, obj in tasks:
+        for y in range(obj.len()) - 1:
+            tasks = y.popitem()
     return tasks
