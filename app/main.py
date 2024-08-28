@@ -16,6 +16,10 @@ templates = Jinja2Templates(directory="app/templates")
 async def read_root(request: Request):
     return templates.TemplateResponse("dash.html", {"request": request})
 
+@app.get("/secondary", response_class=HTMLResponse)
+async def display_secondary(request: Request):
+    return templates.TemplateResponse("secondary.html", {"request": request})
+
 @app.get("/test")
 async def test():
     return {"message": "Test route works!"}
