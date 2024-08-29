@@ -42,6 +42,12 @@ def read_assigned_time_periods(db: Session = Depends(database.get_db)):
         raise HTTPException(status_code=404, detail="No assigned time periods found")
     return assigned_time_periods
 
+@router.get("/assigned_tasks/", response_model=List[schemas.TaskName])
+def read_assigned_tasks(db: Session = Depends(database.et_db)):
+    assigned_tasks = crud.get_assigned_tasks(db)
+    if not assigned_tasks:
+        raise HTTPException(status_code=404, detail="No assigned tasks found")
+    return assigned_tasks
 # @router.get("/tasks_near_time")
 # def tasks_near_time(db: Session = Depends(database.get_db)):
 #     tasks = crud.get_tasks_near_time(db, datetime.now())

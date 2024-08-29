@@ -62,9 +62,10 @@ def update_task(task_id: int, task_update: TaskUpdate, db: Session):
     db.commit()
 
 def get_assigned_time_periods(db: Session):
-    return db.query(TimePeriod).filter(TimePeriod.assignment_id.isnot(None)).all()
+    return db.query(TimePeriod).filter(TimePeriod.assignment_id.is_(None)).all()
 
-
+def get_unassigned_tasks(db: Session):
+    return db.query(Task.task_name).filter(Task.assignment_id.is_(None)).all()
 # def get_tasks_near_time(db: Session, current_time: datetime, time_delta: timedelta = timedelta(minutes=30)):
 #     start_time_lower_bound = current_time - time_delta
 #     start_time_upper_bound = current_time + time_delta
