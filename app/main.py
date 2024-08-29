@@ -20,10 +20,6 @@ async def read_root(request: Request):
 async def display_secondary(request: Request):
     return templates.TemplateResponse("secondary.html", {"request": request})
 
-@app.get("/dump", response_class=HTMLResponse)
-async def display_secondary(request: Request):
-    return templates.TemplateResponse("dump.html", {"request": request})
-
 @app.get("/test")
 async def test():
     return {"message": "Test route works!"}

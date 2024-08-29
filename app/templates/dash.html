@@ -1,3 +1,382 @@
+<!--  <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>timebox</title>
+    <link rel="stylesheet" href="/static/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+
+<body>
+
+
+    <section class="container1">
+        <div class="left">
+            <div class="image">
+                <img
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ6MHr--bkcAbios5T6FKSQ1xeBsFpJgBsF6Q&s" />
+            </div>
+
+            <ul class="listss">
+                <li id="plus"><i class="fa-solid fa-plus"></i> Add task</li>
+                <li id="top"><i class="fa-solid fa-list-check"></i> Top Tasks</li>
+                <li id="secondary"><i class="fa-solid fa-meteor"></i> Secondary</li>
+                <li id="all"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                        class="bi bi-subtract" viewBox="0 0 16 16">
+                        <path
+                            d="M0 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2h2a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2v-2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z" />
+                    </svg>Task dump</li>
+            </ul>
+
+        </div>
+
+        <div class="right">
+            <div class="modallll" id="modallll">
+                <div class="modal_child">
+                    <i class="fa-sharp fa-regular fa-circle-xmark close" id="close"></i>
+                    <h4>Add Task</h4>
+
+                    <form id="form">
+                        <input required type="text" id="tasktitle" placeholder="Enter task title" />
+
+                        <label>Enter start time</label>
+                        <input required type="datetime-local" placeholder="Enter start time" id="startt" />
+
+                        <label>Enter end time</label>
+                        <input required type="datetime-local" placeholder="Enter end time" id="endt" />
+
+                        <select required id="prority">
+                            <option selected>Please choose task type</option>
+                            <option value="P">Top task</option>
+                            <option value="S">Secondary</option>
+                        </select>
+
+                        <textarea required placeholder="Enter task description" id="taskdes">
+
+                    </textarea>
+
+                        <button type="submit" id="submittask">Add</button>
+                    </form>
+
+                </div>
+
+            </div>
+
+            
+
+             <div class="top"></div> -->
+
+            <!-- <table class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr class="table-dark">
+                        <th>Id</th>
+                        <th>Task</th>
+                        <th>Description</th>
+                        <th>Start</th>
+                        <th>End</th>
+                        <th>Action</th>
+                    </tr>
+
+                </thead>
+
+                <tbody id="displayTable">
+
+                </tbody>
+            </table>
+
+
+
+        </div>
+
+        
+
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous">
+    </script>
+
+    <script>
+        const currentTime = new Date();
+        const timeString = currentTime.toTimeString();
+
+        const timeRegex = /\b\d{1,2}:\d{2}\b/;
+        const foundtime = timeString.match(timeRegex)
+        console.log(foundtime[0])
+
+
+        let allTasks;
+        let secondaryTasks;
+        let idfor = 0;
+
+        let current = 0;
+
+        let intime = [];
+        let alltopsecondary = [];
+
+
+
+        function close() {
+            console.log("closing")
+            document.getElementById("modallll").style.display = "none";
+        }
+
+        
+
+        function openmodal() {
+            console.log("opening")
+
+            document.getElementById("modallll").style.display = "flex";
+        }
+
+        document.getElementById("plus").addEventListener("click", openmodal);
+        document.getElementById("close").addEventListener("click", close);
+
+
+        function addTask() {
+            let task = {
+
+            }
+            task.task_name = document.getElementById("tasktitle").value
+            task.task_description = document.getElementById("taskdes").value
+            task.startT = document.getElementById("startt").value;
+            task.endT = document.getElementById("endt").value;
+            task.priority = document.getElementById("prority").value;
+            console.log(task)
+
+
+           
+           if(task !==null){
+
+            fetch("http://localhost:8000/tasks/", {
+                method: "POST",
+                headers: {
+                    "content-type": "application/json"
+                },
+                body: JSON.stringify(task)
+            })
+                .then(function (res) {
+                    return res.json()
+                })
+                .then(function (response) {
+                    console.log(response)
+
+                    if (response.detail === "Cannot create more than 3 top task") {
+                        alert(response.detail)
+                    }
+                    else {
+                        alert("Tasks has been successfully added");
+                    }
+
+                    loadTop()
+                    close()
+                    document.getElementById("form").reset();
+                })
+                .catch(function (err) {
+                    console.log(err)
+                })
+           }
+           else{
+            alert("Please input task details")
+           }
+                
+
+        }
+
+        document.getElementById("submittask").addEventListener("click", addTask);
+
+
+       
+
+        function displayTasks(arr) {
+            document.getElementById("displayTable").innerHTML = "";
+
+            arr.forEach(function (task, index) {
+                let row = document.createElement("tr");
+
+                let id = document.createElement("td");
+                id.append(index + 1);
+
+                let title = document.createElement("td");
+                title.append(task.task_name);
+
+                let description = document.createElement("td");
+                description.append(task.task_description);
+
+
+
+                let start = document.createElement("td");
+                let sfo = task.startT
+                const handm = sfo.substring(11, 16);
+                if (foundtime.toString() === handm.toString()) {
+                    start.classList.add("endingtime")
+                }
+                start.append(task.startT)
+
+
+                let end = document.createElement("td");
+                let fo = task.endT
+                const hoursAndMinutes = fo.substring(11, 16);
+                if (foundtime.toString() === hoursAndMinutes.toString()) {
+                    end.classList.add("endingtime")
+                }
+
+                end.append(task.endT)
+                let actions = document.createElement("td");
+
+
+                let edit = document.createElement("i");
+                edit.classList.add("fa-solid");
+                edit.classList.add("fa-pen-to-square");
+                edit.classList.add("blue")
+                edit.onclick = setUpdate.bind(this, task.task_id, arr);
+                actions.appendChild(edit);
+
+
+                let trash = document.createElement("i");
+                trash.classList.add("fa-solid");
+                trash.classList.add("fa-trash");
+                trash.classList.add("closesss");
+                trash.onclick = deleteTask.bind(this, task.task_id);
+                actions.appendChild(trash);
+
+
+                row.appendChild(id);
+                row.appendChild(title);
+                row.appendChild(description);
+                row.appendChild(start);
+                row.appendChild(end);
+                row.appendChild(actions);
+
+                document.getElementById("displayTable").appendChild(row);
+            })
+
+
+        }
+
+
+        function loadTop() {
+            fetch("http://localhost:8000/tasks/top", {
+                method: "GET"
+            })
+                .then(function (res) {
+                    return res.json()
+                })
+                .then(function (response) {
+                    console.log(response);
+                    allTasks = response;
+
+
+                    displayTasks(allTasks)
+                    current = 1
+
+
+                })
+                .catch(function (err) {
+                    console.log(err);
+
+                })
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            loadTop();
+        });
+
+
+        function deleteTask(id) {
+
+            fetch("http://localhost:8000/tasks/remove/" + id, {
+                method: "DELETE"
+            })
+                .then(function (res) {
+                    return res.json()
+                })
+                .then(function (response) {
+                    console.log(response)
+
+                    alert("Task successfully deleted");
+
+                    if (current === 1) {
+                        loadTop()
+                    }
+                    else if (current === 2) {
+                        loadSecondary()
+                    }
+                    else {
+                        getallTasks()
+                    }
+                })
+                .catch(function (err) {
+                    console.log(err);
+                })
+        }
+
+
+        function loadSecondary() {
+            fetch("http://localhost:8000/tasks/secondary", {
+                method: "GET"
+            })
+                .then(function (res) {
+                    return res.json()
+                })
+                .then(function (response) {
+                    console.log(response);
+                    secondaryTasks = response;
+                    current = 2
+
+                    displayTasks(secondaryTasks)
+                })
+                .catch(function (err) {
+                    console.log(err);
+
+                })
+        }
+
+
+
+        document.getElementById("secondary").addEventListener("click", loadSecondary)
+        document.getElementById("top").addEventListener("click", loadTop)
+
+
+        function getallTasks() {
+            fetch("http://localhost:8000/tasks/all", {
+                method: "GET"
+            })
+                .then(function (res) {
+                    return res.json()
+                })
+                .then(function (response) {
+                    console.log(response);
+                    alltopsecondary = response
+                    displayTasks(response)
+                    current = 3
+
+
+                })
+                .catch(function (err) {
+                    console.log(err);
+
+                })
+
+        }
+
+        document.getElementById("all").addEventListener("click", getallTasks);
+
+
+
+
+    </script>
+</body>
+
+</html> -->
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -15,79 +394,40 @@
 
 
     <main>
-
-      <div class=" d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px; min-height: 100vh;">
+       <div class=" d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px; min-height: 100vh;">
         <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
         </a>
-    </br>
-    <div class="icon">
-        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-hourglass-split" viewBox="0 0 16 16">
-            <path d="M2.5 15a.5.5 0 1 1 0-1h1v-1a4.5 4.5 0 0 1 2.557-4.06c.29-.139.443-.377.443-.59v-.7c0-.213-.154-.451-.443-.59A4.5 4.5 0 0 1 3.5 3V2h-1a.5.5 0 0 1 0-1h11a.5.5 0 0 1 0 1h-1v1a4.5 4.5 0 0 1-2.557 4.06c-.29.139-.443.377-.443.59v.7c0 .213.154.451.443.59A4.5 4.5 0 0 1 12.5 13v1h1a.5.5 0 0 1 0 1zm2-13v1c0 .537.12 1.045.337 1.5h6.326c.216-.455.337-.963.337-1.5V2zm3 6.35c0 .701-.478 1.236-1.011 1.492A3.5 3.5 0 0 0 4.5 13s.866-1.299 3-1.48zm1 0v3.17c2.134.181 3 1.48 3 1.48a3.5 3.5 0 0 0-1.989-3.158C8.978 9.586 8.5 9.052 8.5 8.351z"/>
-          </svg>
-    </div>
-    <div class="time">
-   <h2>Timebox</h2> 
-    </div>
-    </br>
-
-</br>
+        <hr>
         <ul class="nav nav-pills flex-column mb-auto">
-          <hr>
+          <li class="nav-item">
+            <a href="#" class="nav-link active" id="plus" >
+              <svg class="bi me-2" width="40" height="16"><use xlink:href="#home"></use></svg>
+            Add
+            </a>
+          </li>
           <li>
-            <div class="top">
             <a href="http://localhost:8000" class="nav-link text-white ">
               <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
-              <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-clipboard-check" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0"/>
-                <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1z"/>
-                <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0z"/>
-              </svg>
-            Top Tasks
-            <hr>
+            Top
             </a>
-            </div>
           </li>
-
-
           <li>
-            <div class="secondary">
             <a href="http://localhost:8000/secondary" class="nav-link text-white">
               <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
-              <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-award-fill" viewBox="0 0 16 16">
-                <path d="m8 0 1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864z"/>
-                <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1z"/>
-              </svg>
-              Secondary Tasks
-            
-              <hr>
+              Secondary
             </a>
-            </div>
           </li>
-        
+          
         </ul>
-       
-       
-    </br>
-        <ul>
-            <div class="dump">
-            <a href="http://localhost:8000/dump" class="nav-link text-white">
-                <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
-                <i class="fa-solid fa-dumpster-fire"></i>
-                Task Dump<hr>
-                
-            </a>
-        </ul>
-        
-        
-        </div>
-        
+        <hr>
+      </div>
 
       
 
       <div class="flex" style="width: 100%; padding: 10px;">
 
         <div class="modallll" id="modallll">
-            <div class="modal_child" id="add_modal">
+            <div class="modal_child">
                 <i class="fa-sharp fa-regular fa-circle-xmark close" id="close"></i>
                 <h4>Add Task</h4>
 
@@ -117,7 +457,7 @@
 
 
         <div class="modallll" id="modallllupdate">
-            <div class="modal_child" id="modal_child">
+            <div class="modal_child">
                 <i class="fa-sharp fa-regular fa-circle-xmark close" id="closeupdate"></i>
                 <h4>Update Task</h4>
 
@@ -149,11 +489,9 @@
 
 
         <div class="d-grid gap-2">
-            <button class="btn btn-primary" type="button">TOP TASK</button>
+            <button class="btn btn-secondary" type="button">TOP TASK</button>
   
         </div>
-
-
 
     
       <table id="table" class="table  table-bordered table-striped" style="width: 100%; margin-top: 20px; border-radius: 10px;">
@@ -170,14 +508,10 @@
         </tbody>
       </table>
 
-      <button style="width: 40% ;height: 40px;margin-left: 30%;margin-top: 40px;" class="btn btn-sm btn-primary" type="button" id="plus">Add Task</button>
-
-
-      <div id="card" class="card card-primary card_pop"  style="margin-top: 150px; opacity: 1;">
+      <div id="card" class="card card-secondary card_pop"  style="margin-top: 20px; opacity: 1;">
         <div  class="card-body">
           <h5 class="card-title">No Top Tasks</h5>
           <p class="card-text">You don't have a top task ,Please go ahead and add a task</p>
-          <button id="plus2" class="btn-primary btn">Add Task</button>
         </div>
       </div>
 
@@ -220,8 +554,6 @@
         document.getElementById("closeupdate").addEventListener("click", closeUpdate)
 
         document.getElementById("plus").addEventListener("click", openmodal);
-        document.getElementById("plus2").addEventListener("click", openmodal);
-        
         document.getElementById("close").addEventListener("click", close);
         document.getElementById("submittask").addEventListener("click", addTask);
         
@@ -256,7 +588,7 @@
                 let trash = document.createElement("i");
                 trash.classList.add("fa-solid");
                 trash.classList.add("fa-trash");
-                trash.classList.add("closesss");
+                // trash.classList.add("closesss");
                 trash.onclick = deleteTask.bind(this, task.task_id);
                 actions.appendChild(trash);
 
@@ -309,13 +641,6 @@ fetch("http://localhost:8000/tasks/remove/" + id, {
                         document.getElementById("table").style.display="none";
                         document.getElementById("card").style.color="black";
                         document.getElementById("card").style.border="1px solid black";
-                        document.getElementById("plus").style.backgroundColor="white";
-                        document.getElementById("plus").style.border="none";
-                    }
-                    else{
-                        document.getElementById("plus2").style.backgroundColor="white";
-                        document.getElementById("plus2").style.border="none";
-
                     }
                     displayTasks(response)
 
@@ -430,17 +755,6 @@ fetch("http://localhost:8000/tasks/remove/" + id, {
             idforupdate=id;
 
         }
-
-
-        document.getElementById("modallllupdate").addEventListener("click",closeUpdate);
-        document.getElementById("modal_child").addEventListener("click",function(e){
-            e.stopPropagation();
-        })
-
-        document.getElementById("modallll").addEventListener("click",close);
-        document.getElementById("add_modal").addEventListener("click",function(e){
-            e.stopPropagation();
-        })
                 
     </script>
 
