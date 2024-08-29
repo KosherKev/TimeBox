@@ -43,7 +43,7 @@ class Task(BaseModel):
     task_description: str
     priority: PriorityEnum
     created_on: datetime
-    updated_on: datetime
+    updated_on: Optional[datetime]
     assignment_id: Optional[int] = None
 
     class Config:

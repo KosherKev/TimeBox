@@ -31,7 +31,11 @@ def delete_task(task_id: int, db: Session = Depends(database.get_db)):
 def update_task(task_id: int,task_update: schemas.TaskUpdate, db: Session = Depends(database.get_db)):
     return crud.update_task(task_id, task_update, db)
 
-@router.get("/assigned_time_periods/", response_model=List[schemas.TimePeriodSchema])
+@router.get("/secondary", response_model=List[schemas.Task])
+def read_secondary_tasks(db: Session = Depends(database.get_db)):
+    return crud.get_secondary_tasks(db=db)
+
+@router.get("/assigned_time_periods/", response_model=List[schemas.TimePeriod])
 def read_assigned_time_periods(db: Session = Depends(database.get_db)):
     assigned_time_periods = crud.get_assigned_time_periods(db)
     if not assigned_time_periods:
