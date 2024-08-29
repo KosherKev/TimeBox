@@ -1,5 +1,4 @@
-/*
-{
+/* *{
     margin:0px;
     padding:0px;
     font-family: segoe ui;
@@ -10,7 +9,6 @@
 .container1{
     width:100%;
     min-height: 100vh;
-    background-color: #717171;
     display: flex;
 }
 
@@ -26,7 +24,6 @@
 
 .right{
     width: 80%;
-    /* background-color: white;
     height: 100vh;
 
 }
@@ -35,7 +32,6 @@
 .image{
     width: 100%;
     height: 35vh;
-    background-color: red !important;
 }
 
 .image img{
@@ -47,7 +43,6 @@
 .listss{
     width: 100% !important;
     height: 15vh;
-    background-color: green;
     margin-top: -150px;
     display: flex;
     align-items: center;
@@ -70,7 +65,6 @@
     font-weight: 300;
     font-size: 17px;
     text-align: center;
-    background-color: blue; 
     border-bottom: 1px solid lightgray !important;
     }
 
@@ -167,13 +161,7 @@ textarea{
 
 }
 
-.close{
-    position: absolute;
-    right:0;
-    top:0;
-    color:lightgray;
-    font-size: 20px;
-}
+
 
 select{
     padding: 5px 0px;
@@ -213,15 +201,7 @@ input::placeholder{
     font-size: 13px;
 }
 
-form{
-    display: flex;
-    justify-content: space-around;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    row-gap: 15px;
-    position: relative;
-}
+
 
 .closesss{
     font-size: 13px;
@@ -254,5 +234,181 @@ td{
 .endingtime{
     background-color: olivedrab !important;
     color:white;
+} */
+
+
+.card_pop{
+    color: white;
+    border:none;
 }
  */
+
+
+
+main{
+    display: flex;
+}
+
+.flex{
+    flex-direction: column;
+    display: flex;
+}
+
+table{
+    width: 100% !important;
+}
+
+.toast_message{
+    display: flex;
+    width: 50%;
+}
+
+
+.modallll{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.4);
+    display:none;
+    align-items: center;
+    justify-content: start;
+    z-index: 500;
+
+}
+
+.modal_child{
+    width: 50%;
+    padding:20px;
+    border-radius: 10px;
+    background-color: white;
+    margin-left: 100px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 10px;
+    position: relative;
+    z-index: 400;
+
+
+}
+
+.modal_child input{
+    width: 90%;
+    padding:5px 0px;
+    text-indent: 20px;
+    border: none;
+    border: 1px solid lightgray;
+    border: none;
+    border: 1px solid lightgray;
+}
+
+textarea{
+    width: 90%;
+    height: 150px;
+    text-indent: 0px;
+    font-size: 12px;
+    padding: 5px;
+}
+
+.modal_child button{
+    width: 50%;
+    background-color: black;
+    color:white;
+    border:none;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.modal_child button:hover{
+   opacity: 0.9;
+}
+.modal_child button:active{
+   opacity: 0;
+   background-color: white;
+    color:black;
+
+}
+
+
+select{
+    padding: 5px 0px;
+    font-size:13px;
+    width: 90%;
+    border:1px solid lightgray;
+
+}
+
+form{
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    row-gap: 15px;
+    position: relative;
+}
+
+.close{
+    position: absolute;
+    right:0;
+    top:0;
+    color:red;
+    font-size: 30px;
+}
+
+label{
+    align-self: self-start;
+    margin-left:30px;
+    font-size: 11px;
+    margin-bottom: -10px;
+}
+
+
+input::placeholder{
+    font-size: 13px;
+}
+
+table{
+    width: 100% !important;
+}
+
+
+.icon{
+    position: relative;
+    top: 20px;
+    left: 100px;
+}
+
+.time{
+    position: relative;
+    top: 30px;
+    left: 70px;
+}
+
+.dump{
+    position: relative;
+    bottom: 100px;
+    right:25px;
+}
+
+.secondary{
+    position: relative;
+    right: 13px;
+    
+}
+.top{
+    position: relative;
+    right: 9px;
+}
+
+
+
+.sel{
+    margin-top: 50px;
+    width: 100%;
+}
+
+.closesss{
+    margin-left: 30px;
+}

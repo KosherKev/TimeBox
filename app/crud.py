@@ -2,7 +2,7 @@ from fastapi import HTTPException
 from sqlalchemy import between, and_
 from sqlalchemy.orm import Session
 from datetime import datetime, timedelta
-from .models import User, Task
+from .models import User, Task, TimePeriod
 from .schemas import UserCreate, TaskCreate, TaskUpdate
 
 def create_user(db: Session, user: UserCreate):
@@ -57,24 +57,28 @@ def update_task(task_id: int, task_update: TaskUpdate, db: Session):
     task_to_update = db.query(Task).filter(Task.task_id == task_id).first()
     if not task_to_update:
         raise HTTPException(detail="Task not found")  
-    for key, value in task_update.dict().items():
+    for key, value in task_update.model_dump().items():
         setattr(task_to_update, key, value)
     db.commit()
 
-def get_tasks_near_time(db: Session, current_time: datetime, time_delta: timedelta = timedelta(minutes=30)):
-    start_time_lower_bound = current_time - time_delta
-    start_time_upper_bound = current_time + time_delta
-    end_time_lower_bound = current_time - time_delta
-    end_time_upper_bound = current_time + time_delta
+def get_assigned_time_periods(db: Session):
+    return db.query(TimePeriod).filter(TimePeriod.assignment_id.isnot(None)).all()
 
-    tasks = db.query(Task).filter(
-        and_(
-            between(Task.startT, start_time_lower_bound, start_time_upper_bound),
-            between(Task.endT, end_time_lower_bound, end_time_upper_bound)
-        )
-    ).all()
 
-    for x, obj in tasks:
-        for y in range(obj.len()) - 1:
-            tasks = y.popitem()
-    return tasks
+# def get_tasks_near_time(db: Session, current_time: datetime, time_delta: timedelta = timedelta(minutes=30)):
+#     start_time_lower_bound = current_time - time_delta
+#     start_time_upper_bound = current_time + time_delta
+#     end_time_lower_bound = current_time - time_delta
+#     end_time_upper_bound = current_time + time_delta
+
+#     tasks = db.query(Task).filter(
+#         and_(
+#             between(Task.startT, start_time_lower_bound, start_time_upper_bound),
+#             between(Task.endT, end_time_lower_bound, end_time_upper_bound)
+#         )
+#     ).all()
+
+#     for x, obj in tasks:
+#         for y in range(obj.len()) - 1:
+#             tasks = y.popitem()
+#     return tasks
