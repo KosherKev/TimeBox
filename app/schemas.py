@@ -29,7 +29,7 @@ class Task(BaseModel):
     priority: str
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class TaskUpdate(BaseModel):
     task_name: Optional[str] = None
@@ -39,4 +39,4 @@ class TaskUpdate(BaseModel):
     priority: Optional[str] = None
 
     class Config:
-        orm_mode = True
+        from_attributes = True
