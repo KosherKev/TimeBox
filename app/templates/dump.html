@@ -86,24 +86,15 @@
 
             <div class="backkground">
                 <select style="width: 100%;margin-top: 50px;" class="sel" id="taskSelect2">
-                    <option  selected>please select duration</option>
-                    <!-- <option>7:00 - 8:00</option>
-                    <option>8:00 - 9:00</option>
-                    <option>9:00 - 10:00</option>
-                    <option>10:00 - 11:00</option>
-                    <option>11:00 - 12:00</option>
-                    <option>12:00 - 13:00</option>
-                    <option>13:00 - 14:00</option>
-                    <option>14:00 - 15:00</option>
-                    <option>15:00 - 16:00</option>
-                    <option>16:00 - 17:00</option> -->
+                    <!-- <option  selected>please select duration</option> -->
+    
                 </select>
 
                 <select style="margin-top: 10px;width: 100%;" id="taskSelect">
-                    <option value="">Select a task</option>
+                    <!-- <option value="">Select a task</option> -->
                 </select>
 
-                <button style="margin-top: 10px;width: 30%;" class="btn btn-primary">Assign</button>
+                <button id="buttonassign" style="margin-top: 10px;width: 30%;" class="btn btn-primary">Assign</button>
 
                 
 
@@ -119,7 +110,10 @@
 
 
     <script>
-        let all=[];
+            let time_ID=document.getElementById("taskSelect2").value;
+            let task_ID=document.getElementById("taskSelect").value;
+
+
         function unassigned() {
             fetch("http://localhost:8000/tasks/assigned_tasks/", {
                 method: "GET"
@@ -133,7 +127,7 @@
                     const taskSelect = document.getElementById('taskSelect');
                 response.forEach(p => {
                 const option = document.createElement('option');
-                // option.value = p.task_name;
+                option.value = p.task_id;
                 option.textContent = p.task_name; 
                 taskSelect.appendChild(option);
             });
@@ -144,9 +138,12 @@
 
                 })
 
+            
+
         }
 
         function loadTime(){
+
 
             fetch("http://localhost:8000/tasks/assigned_time_periods", {
                 method: "GET"
@@ -160,7 +157,7 @@
                     const taskSelect = document.getElementById('taskSelect2');
                 response.forEach(p => {
                 const option = document.createElement('option');
-                // option.value = p.start_time;
+                option.value = p.id;
                 option.textContent = p.start_time; 
                 taskSelect.appendChild(option);
             });
@@ -171,13 +168,39 @@
 
                 })
 
+
+        }
+        
+
+        function Assign(){
+            console.log(task_ID,time_ID)
+
+            fetch("http://localhost:8000/tasks/update_task_assignment/",{
+                method:"PUT",
+                headers:{
+                    "content-type":"application/json"
+                },
+                body:JSON.stringify({task_ID,time_ID})
+            })
+            .then(function(res){
+                return res.json()
+            })
+            .then(function(response){
+                console.log(response)
+            })
+            .catch(function(err){
+                console.log(err)
+            })
         }
 
+        
+
         document.addEventListener('DOMContentLoaded', () => {
-            // getallTasks()
             loadTime()
             unassigned()
-             });
+        });
+
+        document.getElementById("buttonassign").addEventListener("click",Assign)
 
     </script>
     
