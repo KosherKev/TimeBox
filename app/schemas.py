@@ -60,6 +60,7 @@ class TaskUpdate(BaseModel):
         from_attributes = True
 
 class TaskName(BaseModel):
+    task_id: int
     task_name: str
 
     class Config:
