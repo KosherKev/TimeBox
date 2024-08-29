@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-/* *{
-=======
-/*{
->>>>>>> 09af9116e03d455d19dc4df0c55cd9450cd7d12d
+/*
+{
     margin:0px;
     padding:0px;
     font-family: segoe ui;
@@ -13,11 +10,7 @@
 .container1{
     width:100%;
     min-height: 100vh;
-<<<<<<< HEAD
-    /* background-color: #717171; 
-=======
     background-color: #717171;
->>>>>>> 09af9116e03d455d19dc4df0c55cd9450cd7d12d
     display: flex;
 }
 
@@ -42,11 +35,7 @@
 .image{
     width: 100%;
     height: 35vh;
-<<<<<<< HEAD
-    /* background-color: red; 
-=======
-    /* background-color: red !important;
->>>>>>> 09af9116e03d455d19dc4df0c55cd9450cd7d12d
+    background-color: red !important;
 }
 
 .image img{
@@ -58,16 +47,12 @@
 .listss{
     width: 100% !important;
     height: 15vh;
-<<<<<<< HEAD
-    /* background-color: green; 
-=======
-    /* background-color: green;
+    background-color: green;
     margin-top: -150px;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
->>>>>>> 09af9116e03d455d19dc4df0c55cd9450cd7d12d
 
 }
 
@@ -271,30 +256,3 @@ td{
     color:white;
 }
  */
-
- main{
-    display: flex;
-}
-
-<<<<<<< HEAD
- */
-
- main{
-    display: flex;
-}
-
-.flex{
-    flex-direction: column;
-    display: flex;
-}
-
-=======
-.flex{
-    flex-direction: column;
-    display: flex;
-}
-
->>>>>>> 09af9116e03d455d19dc4df0c55cd9450cd7d12d
-table{
-    width: 100% !important;
-}
