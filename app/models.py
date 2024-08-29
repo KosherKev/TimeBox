@@ -18,7 +18,6 @@ class TaskAssignment(Base):
     task_period_id = Column(Integer, ForeignKey('time_periods.id'))
     task = relationship('Task', foreign_keys=[task_id])
     time_period = relationship('TimePeriod', foreign_keys=[task_period_id])
-
 class Task(Base):
     __tablename__ = 'tasks'
 
@@ -30,14 +29,14 @@ class Task(Base):
     updated_on = Column(TIMESTAMP, server_default=text('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'))
     assignment_id = Column(Integer, ForeignKey('task_assignments.id'))
     assignment = relationship('TaskAssignment', foreign_keys=[assignment_id])
-    # created_on = Column(DateTime, default=datetime.utcnow)
-    # updated_on = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
 class TimePeriod(Base):
     __tablename__ = 'time_periods'
     id = Column(Integer, primary_key=True, autoincrement=True)
     start_time = Column(Time)
     assignment_id = Column(Integer, ForeignKey('task_assignments.id'))
     assignment = relationship('TaskAssignment', foreign_keys=[assignment_id])
+
     # startT = Column(DateTime)
     # endT = Column(DateTime)
     # user_id = Column(Integer, ForeignKey('users.user_id'))
