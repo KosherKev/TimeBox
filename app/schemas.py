@@ -59,6 +59,12 @@ class TaskUpdate(BaseModel):
     class Config:
         from_attributes = True
 
+class TaskName(BaseModel):
+    task_name: str
+
+    class Config:
+        from_attributes = True
+        
 class TimePeriodCreate(BaseModel):
     start_time: time
     assignment_id: Optional[int] = None
