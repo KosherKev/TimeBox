@@ -11,6 +11,7 @@ class UserCreate(BaseModel):
     user_name: str
     user_email: str
     user_password: str
+
 class User(BaseModel):
     user_id: int
     user_name: str
@@ -43,12 +44,17 @@ class Task(BaseModel):
     task_description: str
     priority: PriorityEnum
     created_on: datetime
-    updated_on: datetime
+    updated_on: Optional[datetime]
     assignment_id: Optional[int] = None
 
     class Config:
         from_attributes = True
 
+class TaskName(BaseModel):
+    task_name: str
+
+    class Config:
+        from_attributes = True
 
 class TaskUpdate(BaseModel):
     task_name: Optional[str] = None
