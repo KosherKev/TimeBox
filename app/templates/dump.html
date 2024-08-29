@@ -120,8 +120,8 @@
 
     <script>
         let all=[];
-        function getallTasks() {
-            fetch("http://localhost:8000/tasks/all", {
+        function unassigned() {
+            fetch("http://localhost:8000/tasks/assigned_tasks/", {
                 method: "GET"
             })
                 .then(function (res) {
@@ -131,10 +131,10 @@
                     console.log(response);
 
                     const taskSelect = document.getElementById('taskSelect');
-                response.forEach(task => {
+                response.forEach(p => {
                 const option = document.createElement('option');
-                option.value = task.task_name;
-                option.textContent = task.task_name; 
+                // option.value = p.task_name;
+                option.textContent = p.task_name; 
                 taskSelect.appendChild(option);
             });
                    
@@ -160,7 +160,7 @@
                     const taskSelect = document.getElementById('taskSelect2');
                 response.forEach(p => {
                 const option = document.createElement('option');
-                option.value = p.start_time;
+                // option.value = p.start_time;
                 option.textContent = p.start_time; 
                 taskSelect.appendChild(option);
             });
@@ -176,6 +176,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             // getallTasks()
             loadTime()
+            unassigned()
              });
 
     </script>

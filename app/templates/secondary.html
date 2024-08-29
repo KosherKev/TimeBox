@@ -122,11 +122,6 @@
               <form id="form">
                   <input required type="text" id="tasktitle" placeholder="Enter task title" />
 
-                  <label>Enter start time</label>
-                  <input required type="datetime-local" placeholder="Enter start time" id="startt" />
-
-                  <label>Enter end time</label>
-                  <input required type="datetime-local" placeholder="Enter end time" id="endt" />
 
                   <select required id="prority">
                       <option selected>Please choose task type</option>
@@ -152,11 +147,6 @@
               <form id="form">
                   <input required type="text" id="tasktitleupdate" placeholder="Enter task title" />
 
-                  <label>Enter start time</label>
-                  <input required type="datetime-local" placeholder="Enter start time" id="starttupdate" />
-
-                  <label>Enter end time</label>
-                  <input required type="datetime-local" placeholder="Enter end time" id="endtupdate" />
 
                   <select required id="prorityupdate">
                       <option selected>Please choose task type</option>
@@ -363,8 +353,8 @@ fetch("http://localhost:8000/tasks/remove/" + id, {
             }
             task.task_name = document.getElementById("tasktitle").value
             task.task_description = document.getElementById("taskdes").value
-            task.startT = document.getElementById("startt").value;
-            task.endT = document.getElementById("endt").value;
+            // task.startT = document.getElementById("startt").value;
+            // task.endT = document.getElementById("endt").value;
             task.priority = document.getElementById("prority").value;
             console.log(task)
 
@@ -406,8 +396,8 @@ fetch("http://localhost:8000/tasks/remove/" + id, {
             }
             task.task_name = document.getElementById("tasktitleupdate").value
             task.task_description = document.getElementById("taskdesupdate").value
-            task.startT = document.getElementById("starttupdate").value;
-            task.endT = document.getElementById("endtupdate").value;
+            // task.startT = document.getElementById("starttupdate").value;
+            // task.endT = document.getElementById("endtupdate").value;
             task.priority = document.getElementById("prorityupdate").value;
             console.log(task)
 
@@ -448,8 +438,8 @@ fetch("http://localhost:8000/tasks/remove/" + id, {
             // console.log(task);
 
             document.getElementById("tasktitleupdate").value = task.task_name;
-            document.getElementById("starttupdate").value = task.startT;
-            document.getElementById("endtupdate").value = task.endT;
+            // document.getElementById("starttupdate").value = task.startT;
+            // document.getElementById("endtupdate").value = task.endT;
             document.getElementById("prorityupdate").value = task.priority;
             document.getElementById("taskdesupdate").value = task.task_description;
 

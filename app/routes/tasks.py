@@ -37,14 +37,14 @@ def read_secondary_tasks(db: Session = Depends(database.get_db)):
 
 @router.get("/assigned_time_periods/", response_model=List[schemas.TimePeriod])
 def read_assigned_time_periods(db: Session = Depends(database.get_db)):
-    assigned_time_periods = crud.get_assigned_time_periods(db)
+    assigned_time_periods = crud.get_unassigned_time_periods(db)
     if not assigned_time_periods:
         raise HTTPException(status_code=404, detail="No assigned time periods found")
     return assigned_time_periods
 
 @router.get("/assigned_tasks/", response_model=List[schemas.TaskName])
-def read_assigned_tasks(db: Session = Depends(database.et_db)):
-    assigned_tasks = crud.get_assigned_tasks(db)
+def read_assigned_tasks(db: Session = Depends(database.get_db)):
+    assigned_tasks = crud.get_unassigned_tasks(db)
     if not assigned_tasks:
         raise HTTPException(status_code=404, detail="No assigned tasks found")
     return assigned_tasks

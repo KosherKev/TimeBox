@@ -61,7 +61,7 @@ def update_task(task_id: int, task_update: TaskUpdate, db: Session):
         setattr(task_to_update, key, value)
     db.commit()
 
-def get_assigned_time_periods(db: Session):
+def get_unassigned_time_periods(db: Session):
     return db.query(TimePeriod).filter(TimePeriod.assignment_id.is_(None)).all()
 
 def get_unassigned_tasks(db: Session):
