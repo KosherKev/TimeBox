@@ -31,6 +31,13 @@ class TaskAssignment(BaseModel):
     class Config:
         from_attributes = True
 
+class TaskAssignmentUpdate(BaseModel):
+    task_id: int
+    task_period_id: int
+
+    class Config:
+        from_attributes = True
+
 class TaskCreate(BaseModel):
     task_name: str
     task_description: Optional[str] = None

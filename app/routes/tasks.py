@@ -48,6 +48,18 @@ def read_assigned_tasks(db: Session = Depends(database.get_db)):
     if not assigned_tasks:
         raise HTTPException(status_code=404, detail="No assigned tasks found")
     return assigned_tasks
+
+@router.put("/update_task_assignment/", response_model=schemas.TaskAssignmentUpdate)
+def update_task_assignment_route(
+    update_data: schemas.TaskAssignmentUpdate, db: Session = Depends(database.get_db)
+):
+    task_assignment = crud.update_task_assignment(
+        db, update_data.task_id, update_data.task_period_id
+    )
+    if not task_assignment:
+        raise HTTPException(status_code=404, detail="Task or Time Period not found")
+    return task_assignment
+
 # @router.get("/tasks_near_time")
 # def tasks_near_time(db: Session = Depends(database.get_db)):
 #     tasks = crud.get_tasks_near_time(db, datetime.now())

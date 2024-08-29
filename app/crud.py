@@ -1,9 +1,9 @@
 from fastapi import HTTPException
 from sqlalchemy import between, and_
 from sqlalchemy.orm import Session
-from datetime import datetime, timedelta
 from .models import User, Task, TimePeriod
-from .schemas import UserCreate, TaskCreate, TaskUpdate
+from .schemas import UserCreate, TaskCreate, TaskUpdate, TaskAssignment
+# from datetime import datetime, timedelta
 
 def create_user(db: Session, user: UserCreate):
     db_user = User(user_name=user.user_name, user_email=user.user_email, user_password=user.user_password)
@@ -66,6 +66,37 @@ def get_unassigned_time_periods(db: Session):
 
 def get_unassigned_tasks(db: Session):
     return db.query(Task.task_id, Task.task_name).filter(Task.assignment_id.is_(None)).all()
+
+def update_task_assignment(db: Session, task_id: int, task_period_id: int):
+    # Check if the task and time period exist
+    task = db.query(Task).filter(Task.task_id == task_id).first()
+    time_period = db.query(TimePeriod).filter(TimePeriod.id == task_period_id).first()
+    
+    if not task or not time_period:
+        return None
+
+    # Create or update task assignment
+    task_assignment = db.query(TaskAssignment).filter(
+        TaskAssignment.task_id == task_id,
+        TaskAssignment.task_period_id == task_period_id
+    ).first()
+
+    if not task_assignment:
+        task_assignment = TaskAssignment(task_id=task_id, task_period_id=task_period_id)
+        db.add(task_assignment)
+    else:
+        task_assignment.task_id = task_id
+        task_assignment.task_period_id = task_period_id
+
+    # Update task and time period assignment_id
+    task.assignment_id = task_assignment.id
+    time_period.assignment_id = task_assignment.id
+
+    db.commit()
+    db.refresh(task)
+    db.refresh(time_period)
+    return task_assignment
+
 # def get_tasks_near_time(db: Session, current_time: datetime, time_delta: timedelta = timedelta(minutes=30)):
 #     start_time_lower_bound = current_time - time_delta
 #     start_time_upper_bound = current_time + time_delta
