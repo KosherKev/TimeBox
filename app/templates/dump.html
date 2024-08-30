@@ -96,9 +96,20 @@
 
                 <button id="buttonassign" style="margin-top: 10px;width: 30%;" class="btn btn-primary">Assign</button>
 
-                
 
-                
+                <table id="table" class="table  table-hover table-striped" style="width: 100%; margin-top: 50px;">
+                    <thead>
+                      <tr>
+                        <th scope="col">Task</th>
+                        <th scope="col">Start</th>
+                        <th scope="col">End</th>
+                      </tr>
+                    </thead>
+                    <tbody id="displayTable">
+                      
+                    </tbody>
+                  </table>
+
             </div>
   
         </div>
@@ -184,6 +195,7 @@
             })
             .then(function(res){
                 return res.json()
+                location.reload()
             })
             .then(function(response){
                 console.log(response)
@@ -193,11 +205,30 @@
             })
         }
 
+
+        function getAssigned(){
+
+            fetch("http://localhost:8000/tasks/tasks_with_time/",{
+                method:"GET",
+            })
+            .then(function(res){
+                return res.json()
+            })
+            .then(function(response){
+                console.log(response)
+            })
+            .catch(function(err){
+                console.log(err)
+            })
+
+        }
+
         
 
         document.addEventListener('DOMContentLoaded', () => {
             loadTime()
             unassigned()
+            getAssigned()
         });
 
         document.getElementById("buttonassign").addEventListener("click",Assign)
