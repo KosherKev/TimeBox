@@ -68,14 +68,12 @@ def get_unassigned_tasks(db: Session):
     return db.query(Task.task_id, Task.task_name).filter(Task.assignment_id.is_(None)).all()
 
 def update_task_assignment(db: Session, task_id: int, task_period_id: int):
-    # Check if the task and time period exist
     task = db.query(Task).filter(Task.task_id == task_id).first()
     time_period = db.query(TimePeriod).filter(TimePeriod.id == task_period_id).first()
     
     if not task or not time_period:
         return None
 
-    # Create or update task assignment
     task_assignment = db.query(TaskAssignment).filter(
         TaskAssignment.task_id == task_id,
         TaskAssignment.task_period_id == task_period_id
@@ -88,7 +86,6 @@ def update_task_assignment(db: Session, task_id: int, task_period_id: int):
         task_assignment.task_id = task_id
         task_assignment.task_period_id = task_period_id
 
-    # Update task and time period assignment_id
     task.assignment_id = task_assignment.id
     time_period.assignment_id = task_assignment.id
 
