@@ -366,6 +366,10 @@ label{
     margin-bottom: -10px;
 }
 
+.size{
+    font-size: 13px;
+}
+
 
 input::placeholder{
     font-size: 13px;
