@@ -97,12 +97,13 @@
                 <button id="buttonassign" style="margin-top: 10px;width: 30%;" class="btn btn-primary">Assign</button>
 
 
-                <table id="table" class="table  table-bordered table-striped" style="width: 100%; margin-top: 50px;">
+                <table id="table" class="table  table-bordered table-striped" style="width: 100%; margin-top: 50px;font-size: 13px;">
                     <thead>
                       <tr>
                         <th scope="col">Task</th>
                         <th scope="col">StartTime</th>
                         <th scope="col">EndTime</th>
+                        <th scope="col">Action</th>
                       </tr>
                     </thead>
                     <tbody id="displayTable">
@@ -224,9 +225,26 @@
                 let newTime = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
                 end.append(newTime);
 
+                let actions=document.createElement("td");
+
+
+
+                let edit = document.createElement("i");
+                edit.classList.add("fa-solid");
+                edit.classList.add("fa-toggle-on");
+                edit.classList.add("size")
+                actions.appendChild(edit);
+
+
+                // let trash = document.createElement("i");
+                // trash.classList.add("fa-solid");
+                // trash.classList.add("fa-trash");
+                // actions.appendChild(trash);
+
                 row.appendChild(title);
                 row.appendChild(start);
                 row.appendChild(end);
+                row.appendChild(actions)
 
                 document.getElementById("displayTable").appendChild(row);
             })
@@ -236,6 +254,23 @@
 
 
         function getAssigned(){
+
+            fetch("http://localhost:8000/tasks/tasks_with_time/",{
+                method:"GET",
+            })
+            .then(function(res){
+                return res.json()
+            })
+            .then(function(response){
+                console.log(response)
+                displayTasks(response)
+            })
+            .catch(function(err){
+                console.log(err)
+            })
+
+        }
+        function unlinked(){
 
             fetch("http://localhost:8000/tasks/tasks_with_time/",{
                 method:"GET",
