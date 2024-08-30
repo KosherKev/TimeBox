@@ -60,7 +60,7 @@ def update_task_assignment_route(
         raise HTTPException(status_code=404, detail="Task or Time Period not found")
     return task_assignment
 
-# @router.get("/tasks_near_time")
-# def tasks_near_time(db: Session = Depends(database.get_db)):
-#     tasks = crud.get_tasks_near_time(db, datetime.now())
-#     return tasks
+@router.get("/assigned_tasks/")
+def get_assigned_tasks(db: Session = Depends(database.get_db)):
+    assigned_tasks = crud.get_assigned_tasks_sorted_by_time(db)
+    return assigned_tasks

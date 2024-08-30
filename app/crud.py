@@ -94,20 +94,11 @@ def update_task_assignment(db: Session, task_id: int, task_period_id: int):
     db.refresh(time_period)
     return task_assignment
 
-# def get_tasks_near_time(db: Session, current_time: datetime, time_delta: timedelta = timedelta(minutes=30)):
-#     start_time_lower_bound = current_time - time_delta
-#     start_time_upper_bound = current_time + time_delta
-#     end_time_lower_bound = current_time - time_delta
-#     end_time_upper_bound = current_time + time_delta
-
-#     tasks = db.query(Task).filter(
-#         and_(
-#             between(Task.startT, start_time_lower_bound, start_time_upper_bound),
-#             between(Task.endT, end_time_lower_bound, end_time_upper_bound)
-#         )
-#     ).all()
-
-#     for x, obj in tasks:
-#         for y in range(obj.len()) - 1:
-#             tasks = y.popitem()
-#     return tasks
+def get_assigned_tasks(db: Session):
+    results = db.query(Task.task_name, TimePeriod.start_time)\
+                .join(TaskAssignment, Task.assignment_id == TaskAssignment.id)\
+                .join(TimePeriod, TaskAssignment.task_period_id == TimePeriod.id)\
+                .filter(Task.assignment_id.isnot(None))\
+                .order_by(TimePeriod.start_time)\
+                .all()
+    return results
