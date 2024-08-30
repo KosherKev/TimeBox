@@ -110,9 +110,6 @@
 
 
     <script>
-            let time_ID=document.getElementById("taskSelect2").value;
-            let task_ID=document.getElementById("taskSelect").value;
-
 
         function unassigned() {
             fetch("http://localhost:8000/tasks/assigned_tasks/", {
@@ -168,11 +165,14 @@
 
                 })
 
-
+          
         }
         
 
         function Assign(){
+            let time_ID=Number(document.getElementById("taskSelect2").value);
+            let task_ID=Number(document.getElementById("taskSelect").value);
+
             console.log(task_ID,time_ID)
 
             fetch("http://localhost:8000/tasks/update_task_assignment/",{
@@ -180,7 +180,7 @@
                 headers:{
                     "content-type":"application/json"
                 },
-                body:JSON.stringify({task_ID,time_ID})
+                body:JSON.stringify({task_id:task_ID,task_period_id:time_ID})
             })
             .then(function(res){
                 return res.json()
