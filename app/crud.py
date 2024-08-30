@@ -44,6 +44,7 @@ def delete_task(db: Session, task_id: int):
         db.query(TimePeriod).filter(TimePeriod.assignment_id == task_to_delete.assignment_id).update({TimePeriod.assignment_id: None})
         db.delete(task_to_delete)
         db.commit()
+        return task_to_delete
     else:
         raise HTTPException(status_code=404, detail="Task not found")
 
