@@ -88,13 +88,13 @@ def create_and_assign_task_assignment(db: Session, task_id: int, time_period_id:
     return task_assignment
 
 def get_tasks_and_time(db: Session):
-    results = db.query(Task.task_name, TimePeriod.start_time)\
+    results = db.query(Task.task_id, Task.task_name, TimePeriod.id, TimePeriod.start_time)\
                 .join(TaskAssignment, Task.assignment_id == TaskAssignment.id)\
                 .join(TimePeriod, TaskAssignment.task_period_id == TimePeriod.id)\
                 .filter(Task.assignment_id.isnot(None))\
                 .order_by(TimePeriod.start_time)\
                 .all()
-    return [{"task_name": task_name, "start_time": start_time} for task_name, start_time in results]
+    return [{"task_id": task_id, "time_period_id": id, "task_name": task_name, "start_time": start_time} for task_id, task_name, id, start_time in results]
 
 def unassign_task_and_time_period(db: Session, task_id: int, time_period_id: int):
     task = db.query(Task).filter(Task.task_id == task_id).first()
