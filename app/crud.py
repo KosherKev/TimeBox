@@ -94,11 +94,11 @@ def update_task_assignment(db: Session, task_id: int, task_period_id: int):
     db.refresh(time_period)
     return task_assignment
 
-def get_assigned_tasks(db: Session):
+def get_tasks_and_time(db: Session):
     results = db.query(Task.task_name, TimePeriod.start_time)\
                 .join(TaskAssignment, Task.assignment_id == TaskAssignment.id)\
                 .join(TimePeriod, TaskAssignment.task_period_id == TimePeriod.id)\
                 .filter(Task.assignment_id.isnot(None))\
                 .order_by(TimePeriod.start_time)\
                 .all()
-    return results
+    return [{"task_name": task_name, "start_time": start_time} for task_name, start_time in results]
