@@ -85,24 +85,24 @@
 
 
             <div class="backkground">
-                <select style="width: 100%;margin-top: 50px;" class="sel" id="taskSelect2">
-                    <!-- <option  selected>please select duration</option> -->
+                <select style="width: 100%;" class="sel" id="taskSelect2">
+                    <option  value=0 >please select duration</option>
     
                 </select>
 
                 <select style="margin-top: 10px;width: 100%;" id="taskSelect">
-                    <!-- <option value="">Select a task</option> -->
+                    <option value="">Select a task</option>
                 </select>
 
                 <button id="buttonassign" style="margin-top: 10px;width: 30%;" class="btn btn-primary">Assign</button>
 
 
-                <table id="table" class="table  table-hover table-striped" style="width: 100%; margin-top: 50px;">
+                <table id="table" class="table  table-bordered table-striped" style="width: 100%; margin-top: 50px;">
                     <thead>
                       <tr>
                         <th scope="col">Task</th>
-                        <th scope="col">Start</th>
-                        <th scope="col">End</th>
+                        <th scope="col">StartTime</th>
+                        <th scope="col">EndTime</th>
                       </tr>
                     </thead>
                     <tbody id="displayTable">
@@ -195,7 +195,9 @@
             })
             .then(function(res){
                 return res.json()
-                location.reload()
+                getAssigned()
+                loadTime()
+                unassigned()
             })
             .then(function(response){
                 console.log(response)
@@ -203,6 +205,35 @@
             .catch(function(err){
                 console.log(err)
             })
+        }
+
+        function displayTasks(arr) {
+            document.getElementById("displayTable").innerHTML = "";
+
+            arr.forEach(function (task, index) {
+                let row = document.createElement("tr");
+
+                let title = document.createElement("td");
+                title.append(task.task_name);
+
+                let start = document.createElement("td");
+                start.append(task.start_time);
+
+                let end=document.createElement("td");
+                let time = task.start_time;
+                let [hours, minutes, seconds] = time.split(":").map(Number);
+                hours += 1;
+                let newTime = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+                end.append(newTime);
+
+                row.appendChild(title);
+                row.appendChild(start);
+                row.appendChild(end);
+
+                document.getElementById("displayTable").appendChild(row);
+            })
+
+
         }
 
 
@@ -216,6 +247,7 @@
             })
             .then(function(response){
                 console.log(response)
+                displayTasks(response)
             })
             .catch(function(err){
                 console.log(err)
