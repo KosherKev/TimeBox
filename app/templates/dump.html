@@ -195,12 +195,10 @@
             })
             .then(function(res){
                 return res.json()
-                getAssigned()
-                loadTime()
-                unassigned()
             })
             .then(function(response){
                 console.log(response)
+                location.reload()
             })
             .catch(function(err){
                 console.log(err)

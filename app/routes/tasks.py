@@ -53,7 +53,7 @@ def read_assigned_tasks(db: Session = Depends(database.get_db)):
 def update_task_assignment_route(
     update_data: schemas.TaskAssignmentUpdate, db: Session = Depends(database.get_db)
 ):
-    task_assignment = crud.update_task_assignment(
+    task_assignment = crud.create_and_assign_task_assignment(
         db, update_data.task_id, update_data.task_period_id
     )
     if not task_assignment:
