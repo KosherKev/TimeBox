@@ -64,3 +64,12 @@ def update_task_assignment_route(
 def get_tasks_with_time(db: Session = Depends(database.get_db)):
     assigned_tasks = crud.get_tasks_and_time(db)
     return assigned_tasks
+
+@router.delete("/unassign_task_and_time_period/")
+def unassign_task_and_time_period_route(
+    task_id: int,
+    time_period_id: int,
+    db: Session = Depends(database.get_db)
+):
+    result = crud.unassign_task_and_time_period(db, task_id, time_period_id)
+    return result
