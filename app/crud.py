@@ -95,3 +95,24 @@ def get_tasks_and_time(db: Session):
                 .order_by(TimePeriod.start_time)\
                 .all()
     return [{"task_name": task_name, "start_time": start_time} for task_name, start_time in results]
+
+def unassign_task_and_time_period(db: Session, task_id: int, time_period_id: int):
+    task = db.query(Task).filter(Task.task_id == task_id).first()
+    time_period = db.query(TimePeriod).filter(TimePeriod.id == time_period_id).first()
+
+    if not task or not time_period:
+        return None
+
+    task_assignment = db.query(TaskAssignment).filter(
+        TaskAssignment.task_id == task_id,
+        TaskAssignment.task_period_id == time_period_id
+    ).first()
+
+    task.assignment_id = None
+    time_period.assignment_id = None
+    db.delete(task_assignment)
+    db.commit()
+    db.refresh(task)
+    db.refresh(time_period)
+
+    return {"message": "Task and time period unassigned successfully"}
