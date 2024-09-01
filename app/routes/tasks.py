@@ -65,11 +65,12 @@ def get_tasks_with_time(db: Session = Depends(database.get_db)):
     assigned_tasks = crud.get_tasks_and_time(db)
     return assigned_tasks
 
-@router.delete("/unassign_task_and_time_period/")
+@router.delete("/unassign_task_and_time_period/{task_assignment_id}")
 def unassign_task_and_time_period_route(
-    task_id: int,
-    time_period_id: int,
+    task_assignment_id: int,
     db: Session = Depends(database.get_db)
 ):
-    result = crud.unassign_task_and_time_period(db, task_id, time_period_id)
+    result = crud.unassign_task_and_time_period_by_assignment_id(db, task_assignment_id)
+    if result is None:
+        raise HTTPException(status_code=404, detail="TaskAssignment not found")
     return result

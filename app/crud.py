@@ -88,28 +88,26 @@ def create_and_assign_task_assignment(db: Session, task_id: int, time_period_id:
     return task_assignment
 
 def get_tasks_and_time(db: Session):
-    results = db.query(Task.task_id, Task.task_name, TimePeriod.id, TimePeriod.start_time)\
+    results = db.query(Task.task_name, TimePeriod.id, TimePeriod.start_time)\
                 .join(TaskAssignment, Task.assignment_id == TaskAssignment.id)\
                 .join(TimePeriod, TaskAssignment.task_period_id == TimePeriod.id)\
                 .filter(Task.assignment_id.isnot(None))\
                 .order_by(TimePeriod.start_time)\
                 .all()
-    return [{"task_id": task_id, "time_period_id": id, "task_name": task_name, "start_time": start_time} for task_id, task_name, id, start_time in results]
+    return [{"assignment_id": id, "task_name": task_name, "start_time": start_time} for id, task_name, start_time in results]
 
-def unassign_task_and_time_period(db: Session, task_id: int, time_period_id: int):
-    task = db.query(Task).filter(Task.task_id == task_id).first()
-    time_period = db.query(TimePeriod).filter(TimePeriod.id == time_period_id).first()
+def unassign_task_and_time_period_by_assignment_id(db: Session, task_assignment_id: int):
+    task_assignment = db.query(TaskAssignment).filter(TaskAssignment.id == task_assignment_id).first()
 
-    if not task or not time_period:
+    if not task_assignment:
         return None
 
-    task_assignment = db.query(TaskAssignment).filter(
-        TaskAssignment.task_id == task_id,
-        TaskAssignment.task_period_id == time_period_id
-    ).first()
+    task = db.query(Task).filter(Task.assignment_id == task_assignment_id).first()
+    time_period = db.query(TimePeriod).filter(TimePeriod.assignment_id == task_assignment_id).first()
 
     task.assignment_id = None
     time_period.assignment_id = None
+
     db.delete(task_assignment)
     db.commit()
     db.refresh(task)
