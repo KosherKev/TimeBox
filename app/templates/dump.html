@@ -123,7 +123,7 @@
 
     <script>
 
-        function unassigned() {
+        function assigned() {
             fetch("http://localhost:8000/tasks/assigned_tasks/", {
                 method: "GET"
             })
@@ -146,14 +146,9 @@
                     console.log(err);
 
                 })
-
-            
-
         }
 
         function loadTime(){
-
-
             fetch("http://localhost:8000/tasks/assigned_time_periods", {
                 method: "GET"
             })
@@ -176,10 +171,7 @@
                     console.log(err);
 
                 })
-
-          
         }
-        
 
         function Assign(){
             let time_ID=Number(document.getElementById("taskSelect2").value);
@@ -227,14 +219,12 @@
 
                 let actions=document.createElement("td");
 
-
-
                 let edit = document.createElement("i");
                 edit.classList.add("fa-solid");
                 edit.classList.add("fa-toggle-on");
                 edit.classList.add("size")
+                edit.onclick = unlinked.bind(this, task.task_assignment_id);
                 actions.appendChild(edit);
-
 
                 // let trash = document.createElement("i");
                 // trash.classList.add("fa-solid");
@@ -252,7 +242,6 @@
 
         }
 
-
         function getAssigned(){
 
             fetch("http://localhost:8000/tasks/tasks_with_time/",{
@@ -268,36 +257,30 @@
             .catch(function(err){
                 console.log(err)
             })
-
         }
-        function unlinked(){
+        function unlinked(task_assignment_id){
 
-            fetch("http://localhost:8000/tasks/tasks_with_time/",{
-                method:"GET",
+            fetch("http://localhost:8000/tasks/unassign_task_and_time_period/" + task_assignment_id, {
+                method:"DELETE",
             })
             .then(function(res){
                 return res.json()
             })
             .then(function(response){
                 console.log(response)
-                displayTasks(response)
             })
             .catch(function(err){
                 console.log(err)
             })
-
         }
-
-        
 
         document.addEventListener('DOMContentLoaded', () => {
             loadTime()
-            unassigned()
+            assigned()
             getAssigned()
         });
 
         document.getElementById("buttonassign").addEventListener("click",Assign)
-
     </script>
     
 </body>

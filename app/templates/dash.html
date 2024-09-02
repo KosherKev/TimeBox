@@ -270,33 +270,29 @@
 
                 document.getElementById("displayTable").appendChild(row);
             })
-
-
         }
 
         function deleteTask(id) {
 
-fetch("http://localhost:8000/tasks/remove/" + id, {
-    method: "DELETE"
-})
-    .then(function (res) {
-        return res.json()
-    })
-    .then(function (response) {
-        console.log(response)
+            fetch("http://localhost:8000/tasks/remove/" + id, {
+                method: "DELETE"
+            })
+                .then(function (res) {
+                    return res.json()
+                })
+                .then(function (response) {
+                    console.log(response)
 
-        alert("Task successfully deleted");
+                    alert("Task successfully deleted");
 
-        location.reload()
+                    location.reload()
+                })
+                .catch(function (err) {
+                    console.log(err);
+                })
+            }
 
-    })
-    .catch(function (err) {
-        console.log(err);
-    })
-}
-
-
-         function loadTop() {
+        function loadTop() {
              fetch("http://localhost:8000/tasks/top", {
                 method: "GET"
             })
@@ -325,7 +321,6 @@ fetch("http://localhost:8000/tasks/remove/" + id, {
                 })
                 .catch(function (err) {
                     console.log(err);
-
                 })
         }
 
@@ -377,9 +372,7 @@ fetch("http://localhost:8000/tasks/remove/" + id, {
 
 
            function Update() {
-            let task = {
-
-            }
+            let task = { }
             task.task_name = document.getElementById("tasktitleupdate").value
             task.task_description = document.getElementById("taskdesupdate").value
             // task.startT = document.getElementById("starttupdate").value;
@@ -430,9 +423,7 @@ fetch("http://localhost:8000/tasks/remove/" + id, {
             document.getElementById("taskdesupdate").value = task.task_description;
 
             idforupdate=id;
-
         }
-
 
         document.getElementById("modallllupdate").addEventListener("click",closeUpdate);
         document.getElementById("modal_child").addEventListener("click",function(e){
@@ -442,13 +433,10 @@ fetch("http://localhost:8000/tasks/remove/" + id, {
         document.getElementById("modallll").addEventListener("click",close);
         document.getElementById("add_modal").addEventListener("click",function(e){
             e.stopPropagation();
-        })
-                
+        })          
     </script>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> 
 </body>
 </html>
 

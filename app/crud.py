@@ -94,7 +94,7 @@ def get_tasks_and_time(db: Session):
                 .filter(Task.assignment_id.isnot(None))\
                 .order_by(TimePeriod.start_time)\
                 .all()
-    return [{"assignment_id": id, "task_name": task_name, "start_time": start_time} for id, task_name, start_time in results]
+    return [{"task_name": task_name, "assignment_id": id, "start_time": start_time} for task_name, id, start_time in results]
 
 def unassign_task_and_time_period_by_assignment_id(db: Session, task_assignment_id: int):
     task_assignment = db.query(TaskAssignment).filter(TaskAssignment.id == task_assignment_id).first()
