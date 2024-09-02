@@ -134,17 +134,16 @@
                     console.log(response);
 
                     const taskSelect = document.getElementById('taskSelect');
-                response.forEach(p => {
-                const option = document.createElement('option');
-                option.value = p.task_id;
-                option.textContent = p.task_name; 
-                taskSelect.appendChild(option);
+                    response.forEach(p => {
+                    const option = document.createElement('option');
+                    option.value = p.task_id;
+                    option.textContent = p.task_name; 
+                    taskSelect.appendChild(option);
             });
                    
                 })
                 .catch(function (err) {
                     console.log(err);
-
                 })
         }
 
@@ -159,17 +158,16 @@
                     console.log(response);
 
                     const taskSelect = document.getElementById('taskSelect2');
-                response.forEach(p => {
-                const option = document.createElement('option');
-                option.value = p.id;
-                option.textContent = p.start_time; 
-                taskSelect.appendChild(option);
+                    response.forEach(p => {
+                    const option = document.createElement('option');
+                    option.value = p.id;
+                    option.textContent = p.start_time; 
+                    taskSelect.appendChild(option);
             });
                    
                 })
                 .catch(function (err) {
                     console.log(err);
-
                 })
         }
 
@@ -223,7 +221,7 @@
                 edit.classList.add("fa-solid");
                 edit.classList.add("fa-toggle-on");
                 edit.classList.add("size")
-                edit.onclick = unlinked.bind(this, task.task_assignment_id);
+                edit.onclick = unlinked.bind(this, task.assignment_id);
                 actions.appendChild(edit);
 
                 // let trash = document.createElement("i");
@@ -258,28 +256,32 @@
                 console.log(err)
             })
         }
-        function unlinked(task_assignment_id){
+       
+        function unlinked(assignment_id){
 
-            fetch("http://localhost:8000/tasks/unassign_task_and_time_period/" + task_assignment_id, {
-                method:"DELETE",
+            let task_ass_id=Number(assignment_id)
+            console.log(task_ass_id)
+
+            fetch("http://localhost:8000/tasks/unassign_task_and_time_period/" + task_ass_id, {
+            method:"DELETE",
             })
             .then(function(res){
-                return res.json()
+            return res.json()
             })
             .then(function(response){
-                console.log(response)
+            console.log(response)
+            getAssigned()
             })
             .catch(function(err){
-                console.log(err)
+            console.log(err)
             })
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            loadTime()
             assigned()
+            loadTime()
             getAssigned()
         });
-
         document.getElementById("buttonassign").addEventListener("click",Assign)
     </script>
     

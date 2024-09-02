@@ -46,7 +46,7 @@ def read_assigned_time_periods(db: Session = Depends(database.get_db)):
 def read_assigned_tasks(db: Session = Depends(database.get_db)):
     assigned_tasks = crud.get_unassigned_tasks(db)
     if not assigned_tasks:
-        raise HTTPException(status_code=404, detail="No assigned tasks found")
+        raise HTTPException(status_code=404, detail="No unassigned tasks found")
     return assigned_tasks
 
 @router.put("/update_task_assignment/", response_model=schemas.TaskAssignmentUpdate)

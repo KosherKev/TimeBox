@@ -88,7 +88,7 @@ def create_and_assign_task_assignment(db: Session, task_id: int, time_period_id:
     return task_assignment
 
 def get_tasks_and_time(db: Session):
-    results = db.query(Task.task_name, TimePeriod.id, TimePeriod.start_time)\
+    results = db.query(Task.task_name, TaskAssignment.id, TimePeriod.start_time)\
                 .join(TaskAssignment, Task.assignment_id == TaskAssignment.id)\
                 .join(TimePeriod, TaskAssignment.task_period_id == TimePeriod.id)\
                 .filter(Task.assignment_id.isnot(None))\
@@ -100,17 +100,22 @@ def unassign_task_and_time_period_by_assignment_id(db: Session, task_assignment_
     task_assignment = db.query(TaskAssignment).filter(TaskAssignment.id == task_assignment_id).first()
 
     if not task_assignment:
-        return None
+        return {"message": "Task assignment not found."}
 
     task = db.query(Task).filter(Task.assignment_id == task_assignment_id).first()
     time_period = db.query(TimePeriod).filter(TimePeriod.assignment_id == task_assignment_id).first()
 
-    task.assignment_id = None
-    time_period.assignment_id = None
+    if task:
+        task.assignment_id = None
+    else:
+        return {"message": "Task not found or already unassigned."}
+
+    if time_period:
+        time_period.assignment_id = None
+    else:
+        return {"message": "Time period not found or already unassigned."}
 
     db.delete(task_assignment)
     db.commit()
-    db.refresh(task)
-    db.refresh(time_period)
 
     return {"message": "Task and time period unassigned successfully"}
