@@ -241,7 +241,6 @@ td{
     color: white;
     border:none;
 }
- */
 
  main{
     display: flex;
@@ -256,15 +255,14 @@ main{
     display: flex;
 }
 
-table{
+/* .table{
     width: 100% !important;
-}
+} */
 
 .toast_message{
     display: flex;
     width: 50%;
 }
-
 
 .modallll{
     width: 100%;
@@ -275,7 +273,6 @@ table{
     align-items: center;
     justify-content: start;
     z-index: 500;
-
 }
 
 .modal_child{
@@ -291,8 +288,6 @@ table{
     row-gap: 10px;
     position: relative;
     z-index: 400;
-
-
 }
 
 .modal_child input{
@@ -329,16 +324,13 @@ textarea{
    opacity: 0;
    background-color: white;
     color:black;
-
 }
-
 
 select{
     padding: 5px 0px;
     font-size:13px;
     width: 90%;
     border:1px solid lightgray;
-
 }
 
 form{
@@ -375,10 +367,9 @@ input::placeholder{
     font-size: 13px;
 }
 
-table{
+.table{
     width: 100% !important;
 }
-
 
 .icon{
     position: relative;
@@ -391,24 +382,6 @@ table{
     top: 30px;
     left: 70px;
 }
-
-.dump{
-    position: relative;
-    bottom: 100px;
-    right:25px;
-}
-
-.secondary{
-    position: relative;
-    right: 13px;
-    
-}
-.top{
-    position: relative;
-    right: 9px;
-}
-
-
 
 .sel{
     margin-top: 50px;

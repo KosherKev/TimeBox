@@ -1,443 +1,360 @@
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="/static/style.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-</head>
-<body>
-
-
-    <main>
-
-      <div class=" d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px; min-height: 100vh;">
-        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
-        </a>
-    </br>
-    <div class="icon">
-        <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-hourglass-split" viewBox="0 0 16 16">
-            <path d="M2.5 15a.5.5 0 1 1 0-1h1v-1a4.5 4.5 0 0 1 2.557-4.06c.29-.139.443-.377.443-.59v-.7c0-.213-.154-.451-.443-.59A4.5 4.5 0 0 1 3.5 3V2h-1a.5.5 0 0 1 0-1h11a.5.5 0 0 1 0 1h-1v1a4.5 4.5 0 0 1-2.557 4.06c-.29.139-.443.377-.443.59v.7c0 .213.154.451.443.59A4.5 4.5 0 0 1 12.5 13v1h1a.5.5 0 0 1 0 1zm2-13v1c0 .537.12 1.045.337 1.5h6.326c.216-.455.337-.963.337-1.5V2zm3 6.35c0 .701-.478 1.236-1.011 1.492A3.5 3.5 0 0 0 4.5 13s.866-1.299 3-1.48zm1 0v3.17c2.134.181 3 1.48 3 1.48a3.5 3.5 0 0 0-1.989-3.158C8.978 9.586 8.5 9.052 8.5 8.351z"/>
-          </svg>
-    </div>
-    <div class="time">
-   <h2>Timebox</h2> 
-    </div>
-    </br>
-
-</br>
-        <ul class="nav nav-pills flex-column mb-auto">
-          <hr>
-          <li>
-            <div class="top">
-            <a href="http://localhost:8000" class="nav-link text-white ">
-              <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
-              <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-clipboard-check" viewBox="0 0 16 16">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <link rel="stylesheet" href="/static/style.css"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+            integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+            crossorigin="anonymous" referrerpolicy="no-referrer" />
+    </head>
+    <body>
+        <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+            <symbol id="time-icon" viewBox="0 0 16 16" fill="currentColor">
+                <path d="M2.5 15a.5.5 0 1 1 0-1h1v-1a4.5 4.5 0 0 1 2.557-4.06c.29-.139.443-.377.443-.59v-.7c0-.213-.154-.451-.443-.59A4.5 4.5 0 0 1 3.5 3V2h-1a.5.5 0 0 1 0-1h11a.5.5 0 0 1 0 1h-1v1a4.5 4.5 0 0 1-2.557 4.06c-.29.139-.443.377-.443.59v.7c0 .213.154.451.443.59A4.5 4.5 0 0 1 12.5 13v1h1a.5.5 0 0 1 0 1zm2-13v1c0 .537.12 1.045.337 1.5h6.326c.216-.455.337-.963.337-1.5V2zm3 6.35c0 .701-.478 1.236-1.011 1.492A3.5 3.5 0 0 0 4.5 13s.866-1.299 3-1.48zm1 0v3.17c2.134.181 3 1.48 3 1.48a3.5 3.5 0 0 0-1.989-3.158C8.978 9.586 8.5 9.052 8.5 8.351z"/>
+            </symbol>
+            <symbol id="toptasks" viewBox="0 0 16 16" fill="currentColor">
                 <path fill-rule="evenodd" d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0"/>
                 <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1z"/>
                 <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0z"/>
-              </svg>
-            Top Tasks
-            <hr>
-            </a>
-            </div>
-          </li>
-
-
-          <li>
-            <div class="secondary">
-            <a href="http://localhost:8000/secondary" class="nav-link text-white">
-              <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
-              <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-award-fill" viewBox="0 0 16 16">
+            </symbol>
+            <symbol id="secondarytasks" fill="currentColor"  viewBox="0 0 16 16">
                 <path d="m8 0 1.669.864 1.858.282.842 1.68 1.337 1.32L13.4 6l.306 1.854-1.337 1.32-.842 1.68-1.858.282L8 12l-1.669-.864-1.858-.282-.842-1.68-1.337-1.32L2.6 6l-.306-1.854 1.337-1.32.842-1.68L6.331.864z"/>
                 <path d="M4 11.794V16l4-1 4 1v-4.206l-2.018.306L8 13.126 6.018 12.1z"/>
-              </svg>
-              Secondary Tasks
-            
-              <hr>
-            </a>
+            </symbol>
+        </svg>            
+        <main>
+            <div class=" d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px; min-height: 100vh;">
+                <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                </a>
+                </br>
+                <div class="icon">
+                    <svg class="bi bi-hourglass-split" width="50" height="50">
+                        <use xlink:href="#time-icon"></use>
+                    </svg>
+                </div>
+                <div class="time">
+                    <h2>Timebox</h2> 
+                </div>
+                </br>
+                </br>
+                <ul class="nav nav-pills flex-column mb-auto">
+                    <hr>
+                    <li>
+                        <div>
+                            <a href="http://localhost:8000" class="nav-link text-white ">
+                                <svg class="bi bi-clipboard-check" width="25" height="25">
+                                    <use xlink:href="#toptasks"></use>
+                                </svg>
+                            Top Tasks
+                            </a>
+                        </div>
+                    </li>
+                    <hr>
+                    <li>
+                        <div>
+                            <a href="http://localhost:8000/secondary" class="nav-link text-white">
+                                <svg class="bi bi-award-fill" width="25" height="25">
+                                    <use xlink:href="#secondarytasks"></use>
+                                </svg>
+                            Secondary Tasks
+                            </a>
+                        </div>
+                    </li>
+                    <hr>
+                    <li>
+                        <div>
+                            <a href="http://localhost:8000/dump" class="nav-link text-white">
+                                <i class="fa-solid fa-dumpster-fire"></i>
+                                Task Dump
+                            </a>
+                        </div>
+                    </li>
+                    <hr>
+                </ul>
+                </br>
             </div>
-          </li>
-        
-        </ul>
-       
-       
-    </br>
-        <ul>
-            <div class="dump">
-            <a href="http://localhost:8000/dump" class="nav-link text-white">
-                <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
-                <i class="fa-solid fa-dumpster-fire"></i>
-                Task Dump<hr>
-                
-            </a>
-        </ul>
-        
-        
-        </div>
-        
+            <div class="flex" style="width: 100%; padding: 10px;">
+                <div class="flex" style="width: 100%; padding: 10px;">
+                    <div class="modallll" id="modallll">
+                        <div class="modal_child" id="add_modal">
+                            <i class="fa-sharp fa-regular fa-circle-xmark close" id="close"></i>
+                            <h4>Add Task</h4>
+                            <form id="form">
+                                <input required="required" type="text" id="tasktitle" placeholder="Enter task title" />
+                                <textarea required="required" placeholder="Enter task description" id="taskdes"></textarea>
+                                <button type="submit" id="submittask">Add</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modallll" id="modallllupdate">
+                    <div class="modal_child" id="modal_child">
+                        <i class="fa-sharp fa-regular fa-circle-xmark close" id="closeupdate"></i>
+                        <h4>Update Task</h4>
 
-      
+                        <form id="form">
+                            <input required type="text" id="tasktitleupdate" placeholder="Enter task title" />
 
-      <div class="flex" style="width: 100%; padding: 10px;">
+                            <select required id="prorityupdate">
+                                <option selected>Please choose task type</option>
+                                <option value="P">Top task</option>
+                                <option value="S">Secondary</option>
+                            </select>
 
-        <div class="modallll" id="modallll">
-            <div class="modal_child" id="add_modal">
-                <i class="fa-sharp fa-regular fa-circle-xmark close" id="close"></i>
-                <h4>Add Task</h4>
+                            <textarea required placeholder="Enter task description" id="taskdesupdate">
+                            </textarea>
 
-                <form id="form">
-                    <input required type="text" id="tasktitle" placeholder="Enter task title" />
+                            <button type="submit" id="updatetask">Update</button>
+                        </form>
+                    </div>
+                </div>
 
+                <div class="modallll" id="confirmModal">
+                    <div class="modal_child">
+                        <i class="fa-sharp fa-regular fa-circle-xmark close" id="closeConfirm"></i>
+                        <h4>Are you sure you want to delete this task?</h4>
+                        <button type="button" id="confirmDelete">YES</button>
+                        <button type="button" id="cancelDelete">NO</button>
+                    </div>
+                </div>
 
-                    <select required id="prority">
-                        <option selected>Please choose task type</option>
-                        <option value="P">Top task</option>
-                        <option value="S">Secondary</option>
-                    </select>
+                <div class="d-grid gap-2">
+                    <button class="btn btn-primary" type="button">TOP TASK</button>
+                </div>
 
-                    <textarea required placeholder="Enter task description" id="taskdes"></textarea>
+                <table id="table" class="table  table-bordered table-striped" style="width: 100%; margin-top: 20px; border-radius: 10px; font-size: 13px;">
+                    <thead>
+                        <tr>
+                            <th scope="col">Id</th>
+                            <th scope="col">Task</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="displayTable">
+                    </tbody>
+                </table>
+                <button style="width: 40% ;height: 40px;margin-left: 30%;margin-top: 40px;" class="btn btn-sm btn-primary" type="button" id="plus">Add Task</button>
 
-                    <button type="submit" id="submittask">Add</button>
-                </form>
-
+                <div id="card" class="card card-primary card_pop"  style="margin-top: 150px; opacity: 1;">
+                    <div class="card-body">
+                        <h5 class="card-title">No Top Tasks</h5>
+                        <p class="card-text">You don't have a top task ,Please go ahead and add a task</p>
+                        <button id="plus2" class="btn-primary btn">Add Task</button>
+                    </div>
+                </div>
             </div>
+        </main>
 
-        </div>
+        <script>
+            let idforupdate;
+            let taskIdToDelete;
 
+            document.addEventListener("DOMContentLoaded", function () {
+                loadTop();
+            });
 
-        <div class="modallll" id="modallllupdate">
-            <div class="modal_child" id="modal_child">
-                <i class="fa-sharp fa-regular fa-circle-xmark close" id="closeupdate"></i>
-                <h4>Update Task</h4>
+            function close() {
+                console.log("closing");
+                document.getElementById("modallll").style.display = "none";
+            }
 
-                <form id="form">
-                    <input required type="text" id="tasktitleupdate" placeholder="Enter task title" />
+            function openmodal() {
+                console.log("opening");
+                document.getElementById("modallll").style.display = "flex";
+            }
 
+            function closeUpdate() {
+                console.log("closing");
+                document.getElementById("modallllupdate").style.display = "none";
+            }
 
-                    <select required id="prorityupdate">
-                        <option selected>Please choose task type</option>
-                        <option value="P">Top task</option>
-                        <option value="S">Secondary</option>
-                    </select>
+            function openUpdate() {
+                document.getElementById("modallllupdate").style.display = "flex";
+            }
 
-                    <textarea required placeholder="Enter task description" id="taskdesupdate">
+            function showConfirmModal(id) {
+                taskIdToDelete = id;
+                document.getElementById("confirmModal").style.display = "flex";
+            }
 
-                </textarea>
+            function closeConfirmModal() {
+                document.getElementById("confirmModal").style.display = "none";
+            }
 
-                    <button type="submit" id="updatetask">Update</button>
-                </form>
+            document.getElementById("updatetask").addEventListener("click", Update);
+            document.getElementById("closeupdate").addEventListener("click", closeUpdate);
+            document.getElementById("plus").addEventListener("click", openmodal);
+            document.getElementById("plus2").addEventListener("click", openmodal);
+            document.getElementById("close").addEventListener("click", close);
+            document.getElementById("submittask").addEventListener("click", createtask);
+            document.getElementById("confirmDelete").addEventListener("click", function() {
+                deleteTask(taskIdToDelete);
+                closeConfirmModal();
+            });
+            document.getElementById("cancelDelete").addEventListener("click", closeConfirmModal);
+            document.getElementById("closeConfirm").addEventListener("click", closeConfirmModal);
 
-            </div>
+            function displayTasks(arr) {
+                document.getElementById("displayTable").innerHTML = "";
 
-        </div>
+                arr.forEach(function (task, index) {
+                    let row = document.createElement("tr");
 
-        <div class="modallll">
-            <div class="modal_child">
-                <i class="fa-sharp fa-regular fa-circle-xmark close"></i>
-                <h4>Are you sure?</h4>
-                    <button type="submit">YES</button>
-                    <button type="submit">NO</button>
-                </form>
+                    let id = document.createElement("td");
+                    id.append(index + 1);
 
-            </div>
+                    let title = document.createElement("td");
+                    title.append(task.task_name);
 
-        </div>
+                    let description = document.createElement("td");
+                    description.append(task.task_description);
 
+                    let actions = document.createElement("td");
 
-        <div class="d-grid gap-2">
-            <button class="btn btn-primary" type="button">TOP TASK</button>
-  
-        </div>
+                    let edit = document.createElement("i");
+                    edit.classList.add("fa-solid", "fa-pen-to-square");
+                    edit.onclick = () => setUpdate(task.task_id, arr); // No need for binding
 
+                    let trash = document.createElement("i");
+                    trash.classList.add("fa-solid", "fa-trash", "closesss");
+                    trash.onclick = () => showConfirmModal(task.task_id); // Use confirmation modal
 
+                    actions.appendChild(edit);
+                    actions.appendChild(trash);
 
-    
-      <table id="table" class="table  table-bordered table-striped" style="width: 100%; margin-top: 20px; border-radius: 10px; font-size: 13px;">
-        <thead>
-          <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Task</th>
-            <th scope="col">Description</th>
-            <th scope="col">Action</th>
-          </tr>
-        </thead>
-        <tbody id="displayTable">
-          
-        </tbody>
-      </table>
+                    row.appendChild(id);
+                    row.appendChild(title);
+                    row.appendChild(description);
+                    row.appendChild(actions);
 
-      <button style="width: 40% ;height: 40px;margin-left: 30%;margin-top: 40px;" class="btn btn-sm btn-primary" type="button" id="plus">Add Task</button>
+                    document.getElementById("displayTable").appendChild(row);
+                });
+            }
 
-
-      <div id="card" class="card card-primary card_pop"  style="margin-top: 150px; opacity: 1;">
-        <div  class="card-body">
-          <h5 class="card-title">No Top Tasks</h5>
-          <p class="card-text">You don't have a top task ,Please go ahead and add a task</p>
-          <button id="plus2" class="btn-primary btn">Add Task</button>
-        </div>
-      </div>
-
-
-      
-    </div>
-
-    </main>
-
-
-
-
-    <script>
-
-         let idforupdate;
-        function close() {
-            console.log("closing")
-            document.getElementById("modallll").style.display = "none";
-        }
-
-        function openmodal() {
-            console.log("opening")
-
-            document.getElementById("modallll").style.display = "flex";
-        }
-
-        function closeUpdate() {
-            console.log("closing")
-            document.getElementById("modallllupdate").style.display = "none";
-        }
-
-        function openUpdate() {
-            document.getElementById("modallllupdate").style.display = "flex";
-        }
-
-
-
-        document.getElementById("updatetask").addEventListener("click", Update);
-
-        document.getElementById("closeupdate").addEventListener("click", closeUpdate)
-
-        document.getElementById("plus").addEventListener("click", openmodal);
-        document.getElementById("plus2").addEventListener("click", openmodal);
-        
-        document.getElementById("close").addEventListener("click", close);
-        document.getElementById("submittask").addEventListener("click", addTask);
-        
-
-
-        function displayTasks(arr) {
-            document.getElementById("displayTable").innerHTML = "";
-
-            arr.forEach(function (task, index) {
-                let row = document.createElement("tr");
-
-                let id = document.createElement("td");
-                id.append(index + 1);
-
-                let title = document.createElement("td");
-                title.append(task.task_name);
-
-                let description = document.createElement("td");
-                description.append(task.task_description);
-
-                let actions = document.createElement("td");
-
-
-                let edit = document.createElement("i");
-                edit.classList.add("fa-solid");
-                edit.classList.add("fa-pen-to-square");
-                // edit.classList.add("blue")
-                edit.onclick = setUpdate.bind(this, task.task_id, arr);
-                actions.appendChild(edit);
-
-
-                let trash = document.createElement("i");
-                trash.classList.add("fa-solid");
-                trash.classList.add("fa-trash");
-                trash.classList.add("closesss");
-                trash.onclick = deleteTask.bind(this, task.task_id);
-                actions.appendChild(trash);
-
-
-                row.appendChild(id);
-                row.appendChild(title);
-                row.appendChild(description);
-                row.appendChild(actions);
-
-                document.getElementById("displayTable").appendChild(row);
-            })
-        }
-
-        function deleteTask(id) {
-
-            fetch("http://localhost:8000/tasks/remove/" + id, {
-                method: "DELETE"
-            })
-                .then(function (res) {
-                    return res.json()
+            function loadTop() {
+                fetch("http://localhost:8000/tasks/top", {
+                    method: "GET"
                 })
-                .then(function (response) {
-                    console.log(response)
+                .then(res => res.json())
+                .then(response => {
+                    console.log(response);
+                    let top = response;
+                    
+                    if (top.length === 0) {
+                        document.getElementById("table").style.display = "none";
+                        document.getElementById("card").style.color = "black";
+                        document.getElementById("card").style.border = "1px solid black";
+                        document.getElementById("plus").style.backgroundColor = "white";
+                        document.getElementById("plus").style.border = "none";
+                    } else {
+                        document.getElementById("plus2").style.backgroundColor = "white";
+                        document.getElementById("plus2").style.border = "none";
+                    }
+                    displayTasks(response);
+                })
+                .catch(err => console.log(err));
+            }
 
+            function deleteTask(id) {
+                fetch("http://localhost:8000/tasks/remove/" + id, {
+                    method: "DELETE"
+                })
+                .then(res => res.json())
+                .then(response => {
+                    console.log(response);
                     alert("Task successfully deleted");
-
-                    location.reload()
+                    loadTop(); // Refresh the task list without reloading the page
                 })
-                .catch(function (err) {
-                    console.log(err);
-                })
+                .catch(err => console.log(err));
             }
 
-        function loadTop() {
-             fetch("http://localhost:8000/tasks/top", {
-                method: "GET"
-            })
-                .then(function (res) {
-                    return res.json()
-                })
-                .then(function (response) {
-                    console.log(response);
-                    let top=response;
+            function createtask(event) {
+                event.preventDefault();
 
-                    if( top.length === 0 ){
-                        document.getElementById("table").style.display="none";
-                        document.getElementById("card").style.color="black";
-                        document.getElementById("card").style.border="1px solid black";
-                        document.getElementById("plus").style.backgroundColor="white";
-                        document.getElementById("plus").style.border="none";
-                    }
-                    else{
-                        document.getElementById("plus2").style.backgroundColor="white";
-                        document.getElementById("plus2").style.border="none";
-
-                    }
-                    displayTasks(response)
-
-
-                })
-                .catch(function (err) {
-                    console.log(err);
-                })
-        }
-
-        document.addEventListener("DOMContentLoaded", function () {
-            loadTop();
-        });
-
-        function addTask() {
-            let task = {
-
+                let task = {
+                    task_name: document.getElementById("tasktitle").value,
+                    task_description: document.getElementById("taskdes").value,
+                    priority: 'P'
+                };
+                console.log(task)
+                if (task.task_name === "" || task.task_description === "") {
+                    return;
+                }
+                addTask(task);
             }
-            task.task_name = document.getElementById("tasktitle").value
-            task.task_description = document.getElementById("taskdes").value
-            // task.startT = document.getElementById("startt").value;
-            // task.endT = document.getElementById("endt").value;
-            task.priority = document.getElementById("prority").value;
-            console.log(task)
 
-
-           
-
-            fetch("http://localhost:8000/tasks/", {
-                method: "POST",
-                headers: {
-                    "content-type": "application/json"
-                },
-                body: JSON.stringify(task)
-            })
-                .then(function (res) {
-                    return res.json()
+            function addTask(task) {
+                fetch("http://localhost:8000/tasks/", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(task)
                 })
-                .then(function (response) {
-                    console.log(response)
-
-
-                    if (response.detail === "Cannot create more than 3 top task") {
-                        alert(response.detail)
-                    }
-                    else {
-                        alert("Tasks has been successfully added");
-                    }
-                    location.reload()
-                    document.getElementById("form").reset();
-                })
-                .catch(function (err) {
-                    console.log(err)
-                })
-           }
-
-
-           function Update() {
-            let task = { }
-            task.task_name = document.getElementById("tasktitleupdate").value
-            task.task_description = document.getElementById("taskdesupdate").value
-            // task.startT = document.getElementById("starttupdate").value;
-            // task.endT = document.getElementById("endtupdate").value;
-            task.priority = document.getElementById("prorityupdate").value;
-            console.log(task)
-
-            fetch("http://localhost:8000/tasks/update/" + idforupdate, {
-                method: "PUT",
-                headers: {
-                    "content-type": 'application/json'
-                },
-                body: JSON.stringify(task)
-            })
-                .then(function (res) {
-                    return res.json()
-                })
-                .then(function (response) {
+                .then(response => {
                     console.log(response);
-
-
-                    
-                    alert("Task successfully updated")
-
-                    loadTop()
-
-                    closeUpdate()
-                    
+                    if (response.status === 403) {
+                        alert("Cannot create more than three top tasks");
+                    } else {
+                        alert("Task has been successfully added");
+                        loadTop(); // Refresh the task list after adding
+                        close(); // Close the modal
+                    }
                 })
-                .catch(function (err) {
-                    console.log(err);
+                .catch(err => console.log(err));
+                loadTop(); // Refresh the task list after adding
+                close(); // Close the modal  
+            }
 
+            function Update() {
+                let task = {
+                    task_name: document.getElementById("tasktitleupdate").value,
+                    task_description: document.getElementById("taskdesupdate").value,
+                    priority: document.getElementById("prorityupdate").value
+                };
+
+                console.log(task);
+
+                if (task.task_name === "" || task.task_description === "") {
+                    return;
+                }
+
+                fetch("http://localhost:8000/tasks/update/" + idforupdate, {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(task)
                 })
+                .then(res => res.json())
+                .then(response => {
+                    console.log(response);
+                    alert("Task successfully updated");
+                    loadTop(); // Refresh the task list after updating
+                    closeUpdate(); // Close the update modal
+                })
+                .catch(err => console.log(err));
+            }
 
-        }
+            function setUpdate(id, array) {
+                openUpdate();
+                let task = array.find(a => id === a.task_id);
 
-        function setUpdate(id, array) {
-            openUpdate();
-            let task = array.find(function (a, i) {
-                return id === a.task_id
-            })
-            // console.log(task);
+                document.getElementById("tasktitleupdate").value = task.task_name;
+                document.getElementById("prorityupdate").value = task.priority;
+                document.getElementById("taskdesupdate").value = task.task_description;
 
-            document.getElementById("tasktitleupdate").value = task.task_name;
-            // document.getElementById("starttupdate").value = task.startT;
-            // document.getElementById("endtupdate").value = task.endT;
-            document.getElementById("prorityupdate").value = task.priority;
-            document.getElementById("taskdesupdate").value = task.task_description;
+                idforupdate = id;
+            }
 
-            idforupdate=id;
-        }
-
-        document.getElementById("modallllupdate").addEventListener("click",closeUpdate);
-        document.getElementById("modal_child").addEventListener("click",function(e){
-            e.stopPropagation();
-        })
-
-        document.getElementById("modallll").addEventListener("click",close);
-        document.getElementById("add_modal").addEventListener("click",function(e){
-            e.stopPropagation();
-        })          
-    </script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> 
-</body>
+            document.getElementById("modallllupdate").addEventListener("click", closeUpdate);
+            document.getElementById("modal_child").addEventListener("click", e => e.stopPropagation());
+            document.getElementById("add_modal").addEventListener("click", e => e.stopPropagation());
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> 
+    </body>
 </html>
-
-

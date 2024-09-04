@@ -18,7 +18,7 @@ def get_user(db: Session, user_id: int):
 def create_task(db: Session, task: TaskCreate):
     if task.priority == 'P': 
         if len(get_top_tasks(db)) >= 3:
-            raise HTTPException(status_code=400, detail="Cannot create more than 3 top task")
+            raise HTTPException(status_code=403, detail="Cannot create more than 3 top task")
         else:
             db_task = Task(task_name=task.task_name, task_description=task.task_description, priority=task.priority)
             db.add(db_task)
